@@ -1,0 +1,7 @@
+C:\Coding\С#\FirstCodeWPF\bin\Debug\FirstCodeWPF.exe.config
+C:\Coding\С#\FirstCodeWPF\bin\Debug\FirstCodeWPF.exe
+C:\Coding\С#\FirstCodeWPF\bin\Debug\FirstCodeWPF.pdb
+C:\Coding\С#\FirstCodeWPF\obj\Debug\FirstCodeWPF.csprojAssemblyReference.cache
+C:\Coding\С#\FirstCodeWPF\obj\Debug\FirstCodeWPF.csproj.CoreCompileInputs.cache
+C:\Coding\С#\FirstCodeWPF\obj\Debug\FirstCodeWPF.exe
+C:\Coding\С#\FirstCodeWPF\obj\Debug\FirstCodeWPF.pdb
