@@ -5,3 +5,10 @@ C:\Coding\С#\FirstCodeWPF\obj\Debug\FirstCodeWPF.csprojAssemblyReference.cache
 C:\Coding\С#\FirstCodeWPF\obj\Debug\FirstCodeWPF.csproj.CoreCompileInputs.cache
 C:\Coding\С#\FirstCodeWPF\obj\Debug\FirstCodeWPF.exe
 C:\Coding\С#\FirstCodeWPF\obj\Debug\FirstCodeWPF.pdb
+C:\GitHub\WPF2021\TestCodeWPF\bin\Debug\FirstCodeWPF.exe.config
+C:\GitHub\WPF2021\TestCodeWPF\bin\Debug\FirstCodeWPF.exe
+C:\GitHub\WPF2021\TestCodeWPF\bin\Debug\FirstCodeWPF.pdb
+C:\GitHub\WPF2021\TestCodeWPF\obj\Debug\FirstCodeWPF.csprojAssemblyReference.cache
+C:\GitHub\WPF2021\TestCodeWPF\obj\Debug\FirstCodeWPF.csproj.CoreCompileInputs.cache
+C:\GitHub\WPF2021\TestCodeWPF\obj\Debug\FirstCodeWPF.exe
+C:\GitHub\WPF2021\TestCodeWPF\obj\Debug\FirstCodeWPF.pdb

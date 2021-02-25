@@ -11,7 +11,7 @@ namespace FirstCodeWPF
             Window win = new Window();
             Application app = new Application();
 
-            win.Title = "Jarosloov";
+            win.Title = "!Jarosloov!";
             win.Show();
             app.Run();
         }
