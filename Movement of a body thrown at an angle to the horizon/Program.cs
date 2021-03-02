@@ -18,7 +18,7 @@ namespace ConsoleApp1
             double speed = Convert.ToDouble(Console.ReadLine());
             double angle = Convert.ToDouble(Console.ReadLine());
             double time = (2 * speed * Math.Sin(angle * Math.PI / 180) / G);
-            // Время и растояние   
+            // Время и растояние полёта 
             Console.WriteLine("Time of fight: " + Math.Round((2 * speed *
                 Math.Sin(angle * Math.PI / 180) / G)), 3);
             Console.WriteLine("Length of fight: " + Math.Round((speed * speed *
