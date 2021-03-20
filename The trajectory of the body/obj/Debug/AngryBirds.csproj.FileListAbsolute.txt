@@ -7,3 +7,12 @@ C:\Users\VLAD\Downloads\AngryBirds.csproj\obj\Debug\AngryBirds.csproj.CoreCompil
 C:\Users\VLAD\Downloads\AngryBirds.csproj\obj\Debug\AngryBirds.csproj.CopyComplete
 C:\Users\VLAD\Downloads\AngryBirds.csproj\obj\Debug\AngryBirds.exe
 C:\Users\VLAD\Downloads\AngryBirds.csproj\obj\Debug\AngryBirds.pdb
+C:\GitHub\WPF2021\The trajectory of the body\obj\Debug\AngryBirds.csprojAssemblyReference.cache
+C:\GitHub\WPF2021\The trajectory of the body\obj\Debug\AngryBirds.csproj.CoreCompileInputs.cache
+C:\GitHub\WPF2021\The trajectory of the body\obj\Debug\AngryBirds.exe
+C:\GitHub\WPF2021\The trajectory of the body\obj\Debug\AngryBirds.pdb
+C:\GitHub\WPF2021\The trajectory of the body\bin\Debug\AngryBirds.exe.config
+C:\GitHub\WPF2021\The trajectory of the body\bin\Debug\AngryBirds.exe
+C:\GitHub\WPF2021\The trajectory of the body\bin\Debug\AngryBirds.pdb
+C:\GitHub\WPF2021\The trajectory of the body\bin\Debug\TestingRoom.dll
+C:\GitHub\WPF2021\The trajectory of the body\obj\Debug\AngryBirds.csproj.CopyComplete
