@@ -142,8 +142,59 @@ namespace BodyFlight
         {
             Console.WriteLine("####  запись в .excel  ####");
             Console.WriteLine(" ");
-            Console.WriteLine("##  Находится в разработке ##");
+            //Console.WriteLine("##  Находится в разработке ##");
+            Console.WriteLine("Введите интрервал с которым хотите получать координаты полёта тела:");
+            Console.WriteLine("!Запятая!");
+            double diameter = Convert.ToDouble(Console.ReadLine());
+            double flightLength = Math.Round(((speed * speed * Math.Sin(2 * angle * Math.PI / 180)) / G), 3);
+            double newangle = angle * Math.PI / 180;
+            double t;
+            if (diameter <= 0)
+            {
+                Console.WriteLine("Вы ввели '0' или  число < 0 . Зачем? Введите число > 0");
+                diameter = Convert.ToDouble(Console.ReadLine());
+            }
+            else if (diameter > flightLength)
+            {
+                Console.WriteLine("Ошибка число больше чем, максимальной длины полета. Введите число заново.");
+                diameter = Convert.ToDouble(Console.ReadLine());
+            }
+            try
+            {
+                // Загрузить Excel, затем создать новую пустую рабочую книгу
+                Excel.Application excelApp = new Excel.Application();
 
+                // Сделать приложение Excel видимым
+                excelApp.Visible = true;
+                string txtFile = @"C:\GitHub\WPF2021\BodyFlight\test.xlsx";
+
+                Excel.Workbook workbook = excelApp.Workbooks.Open(
+                        txtFile,
+                        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                        Type.Missing, Type.Missing);
+                Excel._Worksheet workSheet = excelApp.ActiveSheet;
+                int i = 1;
+                for (double l = 0; l <= flightLength; l += diameter)
+                {
+                    t = l / (speed * Math.Cos(newangle));
+                    workSheet.Cells[i, 1] = "[x]:\t"; 
+                    workSheet.Cells[i, 2] = Math.Round(l, 3);
+                    workSheet.Cells[i, 3] = "[y]:\t";
+                    workSheet.Cells[i, 4] = Math.Round((speed * t * Math.Sin(newangle) - (G * t * t) / 2), 3);
+                    ++i;
+                }
+                workbook.Close(true, Type.Missing, Type.Missing);
+                excelApp.Quit();
+                Console.WriteLine("Запись выполнена");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Ошибка");
+                statusExcel = false;
+            }
 
 
             Console.WriteLine(" ");
