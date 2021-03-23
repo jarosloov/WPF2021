@@ -15,7 +15,8 @@ namespace Chapter_07_143_Tile
         public Tile()         
         {             
             Width = SIZE;             
-            Height = SIZE;             
+            Height = SIZE;       
+            
             // Upper-left shadowed border.             
             Polygon poly = new Polygon();             
             poly.Points = new PointCollection(new  Point[]                 
@@ -25,7 +26,8 @@ namespace Chapter_07_143_Tile
                 new Point(BORD, BORD),                     
                 new Point(BORD, SIZE-BORD),  new Point(0, SIZE)                 
             });             poly.Fill = SystemColors .ControlLightLightBrush;            
-            Children.Add(poly);             
+            Children.Add(poly);     
+            
             // Lower-right shadowed border.            
             poly = new Polygon();            
             poly.Points = new PointCollection(new  Point[]                 
@@ -35,7 +37,8 @@ namespace Chapter_07_143_Tile
                 new Point(SIZE-BORD, SIZE-BORD),                     
                 new Point(BORD, SIZE-BORD),  new Point(0, SIZE)                 
             });              poly.Fill = SystemColors .ControlDarkBrush;             
-            Children.Add(poly);              
+            Children.Add(poly);   
+            
             // Host for centered text.              
             Border bord = new Border();              
             bord.Width = SIZE - 2 * BORD;              
@@ -43,7 +46,8 @@ namespace Chapter_07_143_Tile
             bord.Background = SystemColors .ControlBrush;              
             Children.Add(bord);              
             SetLeft(bord, BORD);              
-            SetTop(bord, BORD);              
+            SetTop(bord, BORD);   
+            
             // Display of text.              
             txtblk = new TextBlock();              
             txtblk.FontSize = 32;              
@@ -52,6 +56,7 @@ namespace Chapter_07_143_Tile
             txtblk.VerticalAlignment =  VerticalAlignment.Center;              
             bord.Child = txtblk;         
         }          
+
         // Public property to set text.          
         public string Text          
         {              
