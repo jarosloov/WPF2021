@@ -25,7 +25,7 @@ namespace BallisticFlight
             new List<double>();                             // cлаварь сохранения координат по y
 
         private const double AccelerationOfFreeFall = 9.81; // ускорение свободного падения
-        private const double deltaTime = 0.0001;            // разбиение времени 
+        private const double deltaTime = 0.001;            // разбиение времени 
 
         private double startSpeed;                          // начальная скорость
         private double angleOfInclination;                  // угол наклона
@@ -50,6 +50,7 @@ namespace BallisticFlight
         {
             Input();
         }
+
         // В разработке
         private void Input()
         {
@@ -91,6 +92,14 @@ namespace BallisticFlight
             double coordinates_X = 0;
             double coordinates_Y = 0;
 
+            double modelSpeed = (Math.Sqrt(speed_x * speed_x + speed_y * speed_y));
+
+            double square = (bodyRadius * bodyRadius * Math.PI);
+            // зависит от времени 
+            resistanceForce = coefficientResistance * airDensity
+                * (Math.PI * bodyRadius * bodyRadius) / (2 * materialDensity
+                * (4 / 3) * Math.PI * Math.Pow(bodyRadius, 3)) * modelSpeed;
+
             while (coordinates_Y >= 0)
             {
                 coordinates_X = coordinates_X + deltaTime * speed_x;
@@ -100,13 +109,15 @@ namespace BallisticFlight
                 speed_y = speed_y - deltaTime * (9.81 + resistanceForce * speed_y);
                 if (coordinates_Y <= 0)
                     break;
-                coordinates.Add(Math.Round(coordinates_X, 3), Math.Round(coordinates_Y, 3));
-            }
-            Console.WriteLine('[' + coordinates_X + "  0]");
 
-            foreach (var i in coordinates)
-                Console.WriteLine(i);
-            Console.ReadKey();
+                //Console.WriteLine('[' + coordinates_X + "  0]");
+                coordinates.Add(coordinates_X, coordinates_Y);
+            }
+           
+
+            //foreach (var i in coordinates)
+            //    Console.WriteLine(i);
+            //Console.ReadKey();
         }
         // В разработке  
         private void Menu()
@@ -115,22 +126,64 @@ namespace BallisticFlight
         }
 
         public BallisticFlight(bool test)
-        {
-            Console.Clear();           
+        {         
             startSpeed = 30;
             angleOfInclination = 30;
             startHeight = 0;
             bodyRadius = 1;
-            coefficientResistance = 0.2;
+            coefficientResistance = 0.47;
             materialDensity = 7;
             airDensity =1.29;
-
-            resistanceForce = coefficientResistance
-                * (Math.PI * bodyRadius * bodyRadius) * airDensity / (2 * materialDensity
-                * (4 / 3) * Math.PI * Math.Pow(bodyRadius, 3));
-
-            statusDataEntry = true;
             Calculate();
+            OutputToFileExcel();
+        }
+
+        private void OutputToFileExcel()
+        {
+            try
+            {
+                // Загрузить Excel, затем создать новую пустую рабочую книгу
+                Excel.Application excelApp = new Excel.Application();
+
+                // Сделать приложение Excel видимым
+                excelApp.Visible = true;
+                string txtFile = @"C:\GitHub\WPF2021\BallisticFlight\test.xlsx";
+
+                Excel.Workbook workbook = excelApp.Workbooks.Open(
+                        txtFile,
+                        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                        Type.Missing, Type.Missing);
+
+                Excel._Worksheet workSheet = excelApp.ActiveSheet;
+
+                int i = 1;
+                foreach (var numer in coordinates)
+                {
+                    workSheet.Cells[i, 1] = "[x]:\t";
+                    workSheet.Cells[i, 3] = numer.Key;
+                    workSheet.Cells[i, 2] = "[y]:\t";
+                    workSheet.Cells[i, 4] = numer.Value;
+                    i++;
+                }
+                
+                //for (double i = 0; i <= coordinates.Count; ++i)
+                //{
+                //    workSheet.Cells[i, 1] = "[x]:\t";
+                //    workSheet.Cells[i, 2] = coordinates.Ke
+                //    workSheet.Cells[i, 3] = "[y]:\t";
+                //    workSheet.Cells[i, 4] = coordinates.Values;
+                //}
+                workbook.Close(true, Type.Missing, Type.Missing);
+                excelApp.Quit();
+                Console.WriteLine("Запись выполнена");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Ошибка");
+            }
         }
         // В разработке
         private void GoBack(string SpecifyingLocation)
