@@ -143,18 +143,23 @@ namespace BallisticFlight
             try
             {
                 // Загрузить Excel, затем создать новую пустую рабочую книгу
-                Excel.Application excelApp = new Excel.Application();
+                Excel.Application excelApp = new Excel.Application { Visible = true, DisplayAlerts = false, AlertBeforeOverwriting = false };
 
                 // Сделать приложение Excel видимым
-                excelApp.Visible = true;
-                string txtFile = @"C:\GitHub\WPF2021\BallisticFlight\test.xlsx";
-
-                Excel.Workbook workbook = excelApp.Workbooks.Open(
-                        txtFile,
+                // excelApp.Visible = true;
+               
+                Excel.Workbook workbook = excelApp.Workbooks.Add(Type.Missing);
+                string wd = System.IO.Directory.GetCurrentDirectory();
+                Console.WriteLine(wd);
+                string txtFile = @wd+@"..\..\..\test.xlsx";
+                workbook.SaveAs(txtFile);
+                workbook.Close();
+                workbook=excelApp.Workbooks.Open(
+                        txtFile);/*,
+                        Type.Missing, false, Type.Missing, Type.Missing,
                         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                        Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                        Type.Missing, Type.Missing);
+                        Type.Missing, Type.Missing);*/
 
                 Excel._Worksheet workSheet = excelApp.ActiveSheet;
 
@@ -167,7 +172,7 @@ namespace BallisticFlight
                     workSheet.Cells[i, 4] = numer.Value;
                     i++;
                 }
-                
+
                 //for (double i = 0; i <= coordinates.Count; ++i)
                 //{
                 //    workSheet.Cells[i, 1] = "[x]:\t";
@@ -175,7 +180,8 @@ namespace BallisticFlight
                 //    workSheet.Cells[i, 3] = "[y]:\t";
                 //    workSheet.Cells[i, 4] = coordinates.Values;
                 //}
-                workbook.Close(true, Type.Missing, Type.Missing);
+                workbook.Save();
+                workbook.Close();
                 excelApp.Quit();
                 Console.WriteLine("Запись выполнена");
             }
