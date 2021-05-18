@@ -139,6 +139,201 @@
             <MenuItem Header="Условия задачи"></MenuItem>
         </Menu>
 
+        <TabControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="64" Grid.RowSpan="30">
+            <TabItem>
+                <TabItem.Header >
+                    <StackPanel>
+                        <TextBlock Text="Калькулятор"></TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Border x:Name="regionAB" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="15" Grid.RowSpan="12"   BorderThickness="2" CornerRadius="3" BorderBrush="Black" Background="#FFEBEBEB">
+                        <Border.Effect>
+                            <DropShadowEffect></DropShadowEffect>
+                        </Border.Effect>
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Участок АВ:" Grid.Column="1"  Grid.ColumnSpan="24" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Center" FontSize="14" FontStyle="Italic" FontWeight="Bold"/>
+                            <Separator Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="24"></Separator>
+                            <Label Content="Body mass:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="3" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
+                            <Label Content="Initial speed:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="6" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
+                            <Label Content="Driving force:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="9" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
+                            <Label Content="Resistance force:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="12" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
+                            <Label Content="Сoefficient μ:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="15" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
+                            <Label Content="Angle:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="18" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
+                            <Label Content="Length АB:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="21" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
+
+                            <TextBox Grid.Column="15"  Grid.Row="3" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox Grid.Column="15"  Grid.Row="6" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox Grid.Column="15"  Grid.Row="9" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox Grid.Column="15"  Grid.Row="12" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox Grid.Column="15"  Grid.Row="15" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox Grid.Column="15"  Grid.Row="18" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox Grid.Column="15"  Grid.Row="21" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+                
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <TextBlock Text="Условие задачи"></TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                
+            </TabItem>
+        </TabControl>
+        
         <!--
         <ComboBox SelectedIndex="2">
             <ComboBoxItem>50%</ComboBoxItem>
@@ -168,89 +363,7 @@
 
 
         <!--Участок АВ-->
-        <Border x:Name="regionAB" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="15" Grid.RowSpan="12"   BorderThickness="2" CornerRadius="3" BorderBrush="Black" Background="#FFEBEBEB">
-            <Border.Effect>
-                <DropShadowEffect></DropShadowEffect>
-            </Border.Effect>
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Label Content="Участок АВ:" Grid.Column="1"  Grid.ColumnSpan="24" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Center" FontSize="14" FontStyle="Italic" FontWeight="Bold"/>
-                <Separator Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="24"></Separator>
-                <Label Content="Body mass:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="3" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
-                <Label Content="Initial speed:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="6" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
-                <Label Content="Driving force:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="9" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
-                <Label Content="Resistance force:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="12" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
-                <Label Content="Сoefficient μ:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="15" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
-                <Label Content="Angle:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="18" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
-                <Label Content="Length АB:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="21" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
-
-                <TextBox Grid.Column="15"  Grid.Row="3" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                <TextBox Grid.Column="15"  Grid.Row="6" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                <TextBox Grid.Column="15"  Grid.Row="9" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                <TextBox Grid.Column="15"  Grid.Row="12" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                <TextBox Grid.Column="15"  Grid.Row="15" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                <TextBox Grid.Column="15"  Grid.Row="18" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                <TextBox Grid.Column="15"  Grid.Row="21" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-
-
-            </Grid>
-
-        </Border>
+        
 
 
 
