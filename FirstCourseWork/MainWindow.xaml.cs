@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,10 +22,15 @@ namespace FirstCourseWork
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        
         public MainWindow()
         {
             
             InitializeComponent();
+
+            
+
         }
 
         private void WhiteTheme(object sender, RoutedEventArgs e)
@@ -52,6 +58,11 @@ namespace FirstCourseWork
         private void Exit(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void ButtonStart(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("lpl");
         }
     }
 }
