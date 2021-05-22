@@ -539,9 +539,8 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Canvas Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="45" Grid.RowSpan="22">
-                                <Line Grid.Row="1" Grid.Column="0" Grid.RowSpan="22" 
-                                X1="21" X2="21" Y1="0" Y2="1000" Stroke="Black" ></Line>
+                            <Canvas x:Name="canvas" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="45" Grid.RowSpan="22">
+                                <Polyline x:Name="pline" Stroke="Green" />
                             </Canvas>
                             
                         </Grid>
@@ -560,101 +559,13 @@
             </TabItem>
         </TabControl>
         
-        
-        
-        <!--
-        <ComboBox SelectedIndex="2">
-            <ComboBoxItem>50%</ComboBoxItem>
-            <ComboBoxItem>100%</ComboBoxItem>
-            <ComboBoxItem>150%</ComboBoxItem>
-        </ComboBox>
-        -->
-        <Button x:Name="buttonStart" Grid.Row="28"  Grid.RowSpan="2" Grid.Column="3"  Grid.ColumnSpan="10" Content="Start" FontWeight="Bold" FontSize="18" BorderBrush="#FFA5C0F0" Background="#FFA5C0F0" >
+        <Button x:Name="buttonStart" Grid.Row="28"  Grid.RowSpan="2" Grid.Column="3"  Grid.ColumnSpan="10" Content="Start" FontWeight="Bold" FontSize="18" BorderBrush="#FFA5C0F0" Background="#FFA5C0F0" Click="ButtonStart" >
             <Button.Effect>
                 <DropShadowEffect BlurRadius="10" Color="#FF91AFE4"/>
             </Button.Effect>
             
         </Button>
-        <!--
-        <Button x:Name="buttonClear" Grid.Row="27" Grid.RowSpan="2" Grid.Column="2" Content="Clear"  FontWeight="Bold" FontSize="15" Background="#FFFFD3D9" BorderBrush="#FFFFD3D9" Grid.ColumnSpan="2"  >
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="10" Color="#FFEEB7B4"/>
-            </Button.Effect>
-        </Button>
-        -->
-        <!--Polyline Grid.Row="1" Grid.RowSpan="50" Grid.Column="12"  Grid.ColumnSpan="51" Stroke="Black" Points="0 0 1020 0 1020 650 0 650 0 0"> </-->
-        <!--<Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" Content="Курсовая работа" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="23" FontWeight="Bold" Height="42" Margin="156,139,156,146" Width="198">
-            <Label.Effect>
-                <DropShadowEffect BlurRadius="15" Color="Black"/>
-            </Label.Effect>
-        </Label>
-        -->
-
-
-        <!--Участок АВ-->
-        
-
-
-
-        <!--<TextBlock Grid.Column="1"  Grid.Row="6" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Участок AB:" FontSize="20" Grid.ColumnSpan="10" FontWeight="Bold" />
-        <TextBlock Grid.Column="2"  Grid.Row="7" Grid.RowSpan="3" Grid.ColumnSpan="4" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Body mass:" FontSize="15" Height="22" Margin="0,9,0,8"/>
-        <TextBlock Grid.Column="2"  Grid.Row="9" Grid.RowSpan="3" Grid.ColumnSpan="5" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Initial speed :" FontSize="15" Height="22" Margin="0,9,0,8"/>
-        <TextBlock Grid.Column="2"  Grid.Row="11" Grid.RowSpan="3" Grid.ColumnSpan="5" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Driving force:" FontSize="15" Height="23" Margin="0,9,0,7" />
-        <TextBlock Grid.Column="2"  Grid.Row="14" Grid.RowSpan="1" Grid.ColumnSpan="7" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Resistance force:" FontSize="15" />
-        <TextBlock Grid.Column="2"  Grid.Row="15" Grid.RowSpan="3" Grid.ColumnSpan="5" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Сoefficient μ:" FontSize="15" Height="22" Margin="0,9,0,8" />
-        <TextBlock Grid.Column="2"  Grid.Row="17" Grid.RowSpan="3" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Angle:" FontSize="15" Height="22" Margin="0,9,0,8" />
-        <TextBlock Grid.Column="2"  Grid.Row="19" Grid.RowSpan="3" Grid.ColumnSpan="4" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Length АB:" FontSize="15" Height="22" Margin="0,9,0,8" />
-
-        <TextBox Grid.Column="8"  Grid.Row="7" Grid.RowSpan="3" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" BorderBrush="Black" Background="WhiteSmoke" />
-        <TextBox Grid.Column="8"  Grid.Row="9" Grid.RowSpan="3" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" BorderBrush="Black" Background="WhiteSmoke" />
-        <TextBox Grid.Column="8"  Grid.Row="11" Grid.RowSpan="3" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" BorderBrush="Black" Background="WhiteSmoke" />
-        <TextBox Grid.Column="8"  Grid.Row="13" Grid.RowSpan="3" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" BorderBrush="Black" Background="WhiteSmoke" />
-        <TextBox Grid.Column="8"  Grid.Row="15" Grid.RowSpan="3" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" BorderBrush="Black" Background="WhiteSmoke" />
-        <TextBox Grid.Column="8"  Grid.Row="17" Grid.RowSpan="3" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" BorderBrush="Black" Background="WhiteSmoke" />
-        <TextBox Grid.Column="8"  Grid.Row="19" Grid.RowSpan="3" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" Background="WhiteSmoke" BorderBrush="Black" />
-            -->
-        <!--Участо ВС-->
-
-        <TextBlock Grid.Column="2"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Участок BC:" FontSize="20" Grid.ColumnSpan="2" FontWeight="Bold" Height="26" Margin="198,317,198,1" Width="114" Grid.RowSpan="2" />
-        <TextBlock Grid.Column="2"  Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="coefficient f:" FontSize="15" Height="20" Margin="0,326,0,-2" Width="81"/>
-        <TextBlock Grid.Column="2"  Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Force F:" FontSize="15" Height="20" Margin="0,326,0,-2" Width="51"/>
-        <TextBlock Grid.Column="2"  Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Travel time:" FontSize="15" Height="20" Margin="0,326,0,-2" Width="75"/>
-
-        <TextBox Grid.Column="4"  Grid.Row="2" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" Background="WhiteSmoke" BorderBrush="Black" Height="18" Margin="0,326,0,0" Grid.RowSpan="2" />
-        <TextBox Grid.Column="4"  Grid.Row="2" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" Background="WhiteSmoke" BorderBrush="Black" Height="18" Margin="0,326,0,0" Grid.RowSpan="2" />
-        <TextBox Grid.Column="4"  Grid.Row="2" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" Background="WhiteSmoke" BorderBrush="Black" Height="18" Margin="0,326,0,0" Grid.RowSpan="2" />
-
-
-        <!--Участо СЕ-->
-
-        <TextBlock Grid.Column="2"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Участок CЕ:" FontSize="20" Grid.ColumnSpan="2" FontWeight="Bold" Height="26" Margin="200,317,200,1" Width="110" Grid.RowSpan="2" />
-        <TextBlock Grid.Column="2"  Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Height" FontSize="15" Height="24" Margin="0,319,0,1" Width="45" Grid.RowSpan="2"/>
-
-        <TextBox Grid.Column="4"  Grid.Row="2" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="45" Background="WhiteSmoke" BorderBrush="Black" Height="18" Margin="0,326,0,0" Grid.RowSpan="2" />
-
-
-        <!-- <StatusBar Grid.Row="3"  Grid.Column="0" Grid.ColumnSpan="5" DockPanel.Dock="Bottom" Background="#FFCBCBCB">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-            <StatusBarItem Grid.Column="4" Margin="-32,0,12,1">
-                <ProgressBar Value="50" Width="114" Height="6" />
-            </StatusBarItem>
-        </StatusBar>
--->
-
-
-
+ 
 
     </Grid>
 </Window>

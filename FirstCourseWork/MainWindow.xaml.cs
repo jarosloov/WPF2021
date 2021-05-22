@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FirstCourseWork
 {
@@ -22,15 +23,82 @@ namespace FirstCourseWork
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DispatcherTimer timer = new DispatcherTimer();
+        private double time;
 
-        
         public MainWindow()
         {
             
             InitializeComponent();
+            timer.Tick += new EventHandler(OnTimer);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
 
+
+        }
+
+        private void OnTimer(object sender, EventArgs e)
+        {
+
+            time += 0.01;
+            /**
+            double aW = canvas.ActualWidth ; // середина канваса 
+            double aH = canvas.ActualHeight / 2;
+            //pline.Points.Add(new Point(aW, aH));
+
+            double maxWidth = 2 * Math.Cos(45 * Math.PI / 180) * (-162 * Math.Pow(Math.E, -1 / 9 * 3) + 162.078);
+            double maxHeight = -(-162 * Math.Pow(Math.E, -1 / 9 * 3) + 162.078) * Math.Sin(45 * Math.PI / 180) * 2;
+
+            // координаты полёта
+            double coorX = aW + Math.Cos(45 * Math.PI / 180) * (-162 * Math.Pow(Math.E, -1 / 9 * time) + 162.078) * maxWidth;
+            double coorY = aH -(-162 * Math.Pow(Math.E, -1 / 9 * time) + 162.078) * Math.Sin(45 * Math.PI / 180)  * maxHeight;
             
+            //pline.Points.Add(new Point(time * 5, 200+rnd.Next(-100,100)));
+            
+            pline.Points.Add(new Point(coorX, coorY));
+            if (time > 100)
+                timer.Stop();
+            **/
+            double aW = canvas.ActualWidth;     // ширена канваса 
+            double aH = canvas.ActualHeight ;    // висота канваса
+            double maxWidth = (-180 * Math.Pow(Math.E, -0.1 * 8) + 180) * Math.Cos(45 * Math.PI / 180) + (1.85 * 8 * 8 * 8 - 0.981 * 8 * 8 + 13.33474 * 8);
+            double maxHeight = (-180 * Math.Pow(Math.E, -0.1 * 8) + 180) * Math.Sin(45 * Math.PI / 180) + 32.98845;
+            double coffWidth = -aW / maxWidth;
+            double coffHeight = -aH / maxHeight;
+            double coorX = aW ;
+            double coorY = aH ;
+            double angl = 45 * Math.PI / 180;
+            double _x = (-180 * Math.Pow(Math.E, -0.1 * time) + 180) * Math.Cos(angl);
+            double _y = (-180 * Math.Pow(Math.E, -0.1 * time) + 180) * Math.Sin(angl);
 
+            if (time < 3)
+            {
+                coorX = aW + coffWidth *  _x;
+                coorY = aH + coffHeight *  _y;
+            }
+            
+            if(time > 3 && time < 7)
+            {
+                coorX = aW + coffWidth * ((1.85 * time * time * time -0.981 * time * time + 13.33474 * time));
+                coorY = aH + coffHeight * 32.98845;
+            }
+
+        
+            /**
+            
+            const double G = 9.80665;
+            
+            double x = Math.Round((see * t * Math.Cos(ang * Math.PI / 180)), 3);
+            double y = Math.Round((see * t * Math.Sin(ang * Math.PI / 180) - G * t * t / 2), 3);
+            pline.Points.Add(new Point(aW + coffWidth * x, -(aH + coffHeight * y)));
+            **/
+
+            //double coorX = aW + coffWidth * (Math.Sin( time) * time) /2;
+            //double coorY = aH + coffHeight * (Math.Cos( time) * time) /2;
+            //pline.Points.Add(new Point(time * 5, 200+rnd.Next(-100,100)));
+
+            pline.Points.Add(new Point(coorX , coorY));
+            if (time > 6)
+                timer.Stop();
         }
 
         private void WhiteTheme(object sender, RoutedEventArgs e)
@@ -62,7 +130,7 @@ namespace FirstCourseWork
 
         private void ButtonStart(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("lpl");
+            timer.Start();
         }
     }
 }
