@@ -39,7 +39,7 @@ namespace FirstCourseWork
         private void OnTimer(object sender, EventArgs e)
         {
 
-            time += 0.01;
+            time += 0.1;
             /**
             double aW = canvas.ActualWidth ; // середина канваса 
             double aH = canvas.ActualHeight / 2;
@@ -59,9 +59,9 @@ namespace FirstCourseWork
                 timer.Stop();
             **/
             double aW = canvas.ActualWidth;     // ширена канваса 
-            double aH = canvas.ActualHeight ;    // висота канваса
-            double maxWidth = (-180 * Math.Pow(Math.E, -0.1 * 8) + 180) * Math.Cos(45 * Math.PI / 180) + (1.85 * 8 * 8 * 8 - 0.981 * 8 * 8 + 13.33474 * 8);
-            double maxHeight = (-180 * Math.Pow(Math.E, -0.1 * 8) + 180) * Math.Sin(45 * Math.PI / 180) + 32.98845;
+            double aH = canvas.ActualHeight /2;    // висота канваса
+            double maxWidth = (-180 * Math.Pow(Math.E, -0.1 * 8) + 180) * Math.Cos(45 * Math.PI / 180) + (1.85 * 8 * 8 * 8 - 0.981 * 8 * 8 + 13.33474 * 8) + 721.81263 +  94.28674 * 10; //1024.08237
+            double maxHeight = (-180 * Math.Pow(Math.E, -0.1 * 8) + 180) * Math.Sin(45 * Math.PI / 180) +100;
             double coffWidth = -aW / maxWidth;
             double coffHeight = -aH / maxHeight;
             double coorX = aW ;
@@ -82,22 +82,32 @@ namespace FirstCourseWork
                 coorY = aH + coffHeight * 32.98845;
             }
 
-        
-            /**
-            
-            const double G = 9.80665;
-            
-            double x = Math.Round((see * t * Math.Cos(ang * Math.PI / 180)), 3);
-            double y = Math.Round((see * t * Math.Sin(ang * Math.PI / 180) - G * t * t / 2), 3);
-            pline.Points.Add(new Point(aW + coffWidth * x, -(aH + coffHeight * y)));
-            **/
+            if (time > 7 && time < 10)
+            {
+                for (double t = 0; t < 10; t += 0.1)
+                {
+                    coorX = 721.81263 + aW + (coffWidth * 94.28674 * t);
+                    coorY = aH - coffHeight * (9.81 * (t * t) / 2 + 3) + 32.98845;
+                }
+            }
 
-            //double coorX = aW + coffWidth * (Math.Sin( time) * time) /2;
-            //double coorY = aH + coffHeight * (Math.Cos( time) * time) /2;
-            //pline.Points.Add(new Point(time * 5, 200+rnd.Next(-100,100)));
+           
 
-            pline.Points.Add(new Point(coorX , coorY));
-            if (time > 6)
+                /**
+                
+                const double G = 9.80665;
+                
+                double x = Math.Round((see * t * Math.Cos(ang * Math.PI / 180)), 3);
+                double y = Math.Round((see * t * Math.Sin(ang * Math.PI / 180) - G * t * t / 2), 3);
+                pline.Points.Add(new Point(aW + coffWidth * x, -(aH + coffHeight * y)));
+                **/
+
+                //double coorX = aW + coffWidth * (Math.Sin( time) * time) /2;
+                //double coorY = aH + coffHeight * (Math.Cos( time) * time) /2;
+                //pline.Points.Add(new Point(time * 5, 200+rnd.Next(-100,100)));
+
+                pline.Points.Add(new Point(coorX , coorY));
+            if (time > 8)
                 timer.Stop();
         }
 
