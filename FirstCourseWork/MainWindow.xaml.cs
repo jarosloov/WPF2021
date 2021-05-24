@@ -18,13 +18,22 @@ using System.Windows.Threading;
 
 namespace FirstCourseWork
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private DispatcherTimer timer = new DispatcherTimer();
         private double time;
+        
+        // Участок АВ
+        private double _body_mass;
+        private double _initial_speed;
+        private double _driving_force;
+        private double _resistance_force;
+        private double _coefficient_μ;
+        private double _angle;
+        private double _lengthАB;
+        
+        
+        const double G = 9.80665;
 
         public MainWindow()
         {
@@ -74,28 +83,28 @@ namespace FirstCourseWork
             {
                 coorX = aW + coffWidth *  _x;
                 coorY = aH + coffHeight *  _y;
+                plineAB.Points.Add(new Point(coorX , coorY));
             }
             
-            if(time > 3 && time < 7)
+            if(time > 2 && time < 7)
             {
                 coorX = aW + coffWidth * ((1.85 * time * time * time -0.981 * time * time + 13.33474 * time));
                 coorY = aH + coffHeight * 32.98845;
+                plineBC.Points.Add(new Point(coorX , coorY));
             }
 
-            if (time > 7 && time < 10)
+            if ( time < 2.5)
             {
-                for (double t = 0; t < 10; t += 0.1)
-                {
-                    coorX = 721.81263 + aW + (coffWidth * 94.28674 * t);
-                    coorY = aH - coffHeight * (9.81 * (t * t) / 2 + 3) + 32.98845;
-                }
+                coorX =   aW - 220 + (coffWidth * 94.28674 * time);
+                coorY = aH - coffHeight * (9.81 * (time * time) / 2 + 3) - 60;
+                plineCE.Points.Add(new Point(coorX , coorY));
             }
 
            
 
                 /**
                 
-                const double G = 9.80665;
+                
                 
                 double x = Math.Round((see * t * Math.Cos(ang * Math.PI / 180)), 3);
                 double y = Math.Round((see * t * Math.Sin(ang * Math.PI / 180) - G * t * t / 2), 3);
@@ -106,8 +115,8 @@ namespace FirstCourseWork
                 //double coorY = aH + coffHeight * (Math.Cos( time) * time) /2;
                 //pline.Points.Add(new Point(time * 5, 200+rnd.Next(-100,100)));
 
-                pline.Points.Add(new Point(coorX , coorY));
-            if (time > 8)
+                
+            if (time > 10)
                 timer.Stop();
         }
 
@@ -140,6 +149,15 @@ namespace FirstCourseWork
 
         private void ButtonStart(object sender, RoutedEventArgs e)
         {
+            /*
+            _body_mass = Convert.ToDouble(body_mass);
+            _angle = Convert.ToDouble(angle);
+            _coefficient_μ = Convert.ToDouble(coefficient_μ);
+            _driving_force = Convert.ToDouble(driving_force);
+            _initial_speed = Convert.ToDouble(initial_speed);
+            _resistance_force = Convert.ToDouble(resistance_force);
+            _lengthАB = Convert.ToDouble(lengthАB);
+            */
             timer.Start();
         }
     }

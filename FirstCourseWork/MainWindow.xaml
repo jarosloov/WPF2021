@@ -327,13 +327,13 @@
                             <Label Content="Angle:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="18" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
                             <Label Content="Length АB:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="21" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
 
-                            <TextBox Grid.Column="15"  Grid.Row="3" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                            <TextBox Grid.Column="15"  Grid.Row="6" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                            <TextBox Grid.Column="15"  Grid.Row="9" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                            <TextBox Grid.Column="15"  Grid.Row="12" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                            <TextBox Grid.Column="15"  Grid.Row="15" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                            <TextBox Grid.Column="15"  Grid.Row="18" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                            <TextBox Grid.Column="15"  Grid.Row="21" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="body_mass" Grid.Column="15"  Grid.Row="3" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="initial_speed" Grid.Column="15"  Grid.Row="6" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="driving_force" Grid.Column="15"  Grid.Row="9" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="resistance_force" Grid.Column="15"  Grid.Row="12" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="coefficient_μ" Grid.Column="15"  Grid.Row="15" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="angle" Grid.Column="15"  Grid.Row="18" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="lengthАB" Grid.Column="15"  Grid.Row="21" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
 
 
                         </Grid>
@@ -392,17 +392,17 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
+                            
                             <Label Content="Участок BC:" Grid.Column="1"  Grid.ColumnSpan="24" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Center" FontSize="14" FontStyle="Italic" FontWeight="Bold"/>
                             <Separator Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="24"></Separator>
                             <Label Content="Coefficient f:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="3" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
                             <Label Content="Force F:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="6" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
                             <Label Content="Travel time:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="9" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
                             
-                            <TextBox Grid.Column="15"  Grid.Row="3" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                            <TextBox Grid.Column="15"  Grid.Row="6" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
-                            <TextBox Grid.Column="15"  Grid.Row="9" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="coefficient_f" Grid.Column="15"  Grid.Row="3" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="force_F" Grid.Column="15"  Grid.Row="6" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="travel_time" Grid.Column="15"  Grid.Row="9" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
                             
-
                         </Grid>
 
                     </Border>
@@ -454,7 +454,7 @@
                             <Separator Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="24"></Separator>
                             <Label Content="Height:" Grid.Column="1"  Grid.ColumnSpan="12" Grid.Row="3" Grid.RowSpan="3" HorizontalAlignment="Left" FontSize="14" FontStyle="Italic"/>
                         
-                            <TextBox Grid.Column="15"  Grid.Row="3" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
+                            <TextBox x:Name="height" Grid.Column="15"  Grid.Row="3" Grid.RowSpan="3" BorderBrush="#FFEBEBEB" MaxLength="10" MaxLines="10" Background="White" FontSize="17" HorizontalContentAlignment="Center"  Grid.ColumnSpan="10" Margin="1,4.333,0,3.333"  />
                            
 
                         </Grid>
@@ -540,7 +540,9 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Canvas x:Name="canvas" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="45" Grid.RowSpan="22">
-                                <Polyline x:Name="pline" Stroke="Green" />
+                                <Polyline x:Name="plineAB" Stroke="Green" />
+                                <Polyline x:Name="plineBC" Stroke="Fuchsia"></Polyline>
+                                <Polyline x:Name="plineCE" Stroke="Blue" ></Polyline>
                             </Canvas>
                             
                         </Grid>
