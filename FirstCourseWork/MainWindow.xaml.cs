@@ -26,12 +26,16 @@ namespace FirstCourseWork
         // Участок АВ
         private double _body_mass;
         private double _initial_speed;
-        private double _driving_force;
+        private double _driving_force; //Q
         private double _resistance_force;
         private double _coefficient_μ;
         private double _angle;
         private double _lengthАB;
-        
+
+        private double xAB;
+        private double yAB;
+        private double flipXAB;
+        private double flipYAB;
         
         const double G = 9.80665;
 
@@ -52,11 +56,12 @@ namespace FirstCourseWork
             
             _body_mass = Convert.ToDouble(body_mass.Text);
             _angle = Convert.ToDouble(angle.Text);
+            _angle = _angle * Math.PI / 180;
             _coefficient_μ = Convert.ToDouble(coefficient_μ.Text);
             _driving_force = Convert.ToDouble(driving_force.Text);
             _initial_speed = Convert.ToDouble(initial_speed.Text);
-            _resistance_force = Convert.ToDouble(resistance_force.Text);
-            _lengthАB = Convert.ToDouble(lengthАB.Text);
+           // _resistance_force = Convert.ToDouble(resistance_force.Text);
+            //_lengthАB = Convert.ToDouble(lengthАB.Text);
            
             double aW = canvas.ActualWidth;     // ширена канваса 
             double aH = canvas.ActualHeight /2;    // висота канваса
@@ -71,25 +76,28 @@ namespace FirstCourseWork
             double _x = (-180 * Math.Pow(Math.E, -0.1 * time) + 180) * Math.Cos(angl);
             double _y = (-180 * Math.Pow(Math.E, -0.1 * time) + 180) * Math.Sin(angl);
 
+            resistance_force.Text = "μ * V";
+
             if (time < 3)
             {
-                coorX = aW + coffWidth *  _x;
-                coorY = aH + coffHeight *  _y;
-                plineAB.Points.Add(new Point(coorX , coorY));
+                AreaAB();
+                //coorX = aW + coffWidth *  _x;
+                //coorY = aH + coffHeight *  _y;
+                //plineAB.Points.Add(new Point(coorX , coorY));
             }
             
             if(time > 2 && time < 7)
             {
-                coorX = aW + coffWidth * ((1.85 * time * time * time -0.981 * time * time + 13.33474 * time));
-                coorY = aH + coffHeight * 32.98845;
-                plineBC.Points.Add(new Point(coorX , coorY));
+                //coorX = aW + coffWidth * ((1.85 * time * time * time -0.981 * time * time + 13.33474 * time));
+                //coorY = aH + coffHeight * 32.98845;
+                //plineBC.Points.Add(new Point(coorX , coorY));
             }
 
             if ( time < 2.5)
             {
-                coorX =   aW - 220 + (coffWidth * 94.28674 * time);
-                coorY = aH - coffHeight * (9.81 * (time * time) / 2 + 3) - 60;
-                plineCE.Points.Add(new Point(coorX , coorY));
+                //coorX =   aW - 220 + (coffWidth * 94.28674 * time);
+                //coorY = aH - coffHeight * (9.81 * (time * time) / 2 + 3) - 60;
+                //plineCE.Points.Add(new Point(coorX , coorY));
             }
 
             if (time > 10)
@@ -98,7 +106,23 @@ namespace FirstCourseWork
 
         private void AreaAB()
         {
-            
+           
+
+            xAB = -162 / (Math.Exp(_coefficient_μ / _body_mass * time)) - _driving_force / _body_mass + 164;
+
+            double aW = canvas.ActualWidth;     // ширена канваса 
+            double aH = canvas.ActualHeight / 2;    // висота канваса
+
+            double maxWidth = -162 / (Math.Exp(_coefficient_μ / _body_mass * 3)) - _driving_force / _body_mass + 500; //1024.08237
+            double maxHeight = -162 / (Math.Exp(_coefficient_μ / _body_mass * 3)) - _driving_force / _body_mass + 164;
+            double coffWidth = -aW / maxWidth;
+            double coffHeight = -aH / maxHeight;
+
+            flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
+            flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
+
+            plineAB.Points.Add(new Point(flipXAB,flipYAB));
+
         }
 
         private void WhiteTheme(object sender, RoutedEventArgs e)
