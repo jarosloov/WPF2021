@@ -49,26 +49,18 @@ namespace FirstCourseWork
         {
 
             time += 0.1;
-            /**
-            double aW = canvas.ActualWidth ; // середина канваса 
-            double aH = canvas.ActualHeight / 2;
-            //pline.Points.Add(new Point(aW, aH));
-
-            double maxWidth = 2 * Math.Cos(45 * Math.PI / 180) * (-162 * Math.Pow(Math.E, -1 / 9 * 3) + 162.078);
-            double maxHeight = -(-162 * Math.Pow(Math.E, -1 / 9 * 3) + 162.078) * Math.Sin(45 * Math.PI / 180) * 2;
-
-            // координаты полёта
-            double coorX = aW + Math.Cos(45 * Math.PI / 180) * (-162 * Math.Pow(Math.E, -1 / 9 * time) + 162.078) * maxWidth;
-            double coorY = aH -(-162 * Math.Pow(Math.E, -1 / 9 * time) + 162.078) * Math.Sin(45 * Math.PI / 180)  * maxHeight;
             
-            //pline.Points.Add(new Point(time * 5, 200+rnd.Next(-100,100)));
-            
-            pline.Points.Add(new Point(coorX, coorY));
-            if (time > 100)
-                timer.Stop();
-            **/
+            _body_mass = Convert.ToDouble(body_mass.Text);
+            _angle = Convert.ToDouble(angle.Text);
+            _coefficient_μ = Convert.ToDouble(coefficient_μ.Text);
+            _driving_force = Convert.ToDouble(driving_force.Text);
+            _initial_speed = Convert.ToDouble(initial_speed.Text);
+            _resistance_force = Convert.ToDouble(resistance_force.Text);
+            _lengthАB = Convert.ToDouble(lengthАB.Text);
+           
             double aW = canvas.ActualWidth;     // ширена канваса 
             double aH = canvas.ActualHeight /2;    // висота канваса
+            
             double maxWidth = (-180 * Math.Pow(Math.E, -0.1 * 8) + 180) * Math.Cos(45 * Math.PI / 180) + (1.85 * 8 * 8 * 8 - 0.981 * 8 * 8 + 13.33474 * 8) + 721.81263 +  94.28674 * 10; //1024.08237
             double maxHeight = (-180 * Math.Pow(Math.E, -0.1 * 8) + 180) * Math.Sin(45 * Math.PI / 180) +100;
             double coffWidth = -aW / maxWidth;
@@ -100,24 +92,13 @@ namespace FirstCourseWork
                 plineCE.Points.Add(new Point(coorX , coorY));
             }
 
-           
-
-                /**
-                
-                
-                
-                double x = Math.Round((see * t * Math.Cos(ang * Math.PI / 180)), 3);
-                double y = Math.Round((see * t * Math.Sin(ang * Math.PI / 180) - G * t * t / 2), 3);
-                pline.Points.Add(new Point(aW + coffWidth * x, -(aH + coffHeight * y)));
-                **/
-
-                //double coorX = aW + coffWidth * (Math.Sin( time) * time) /2;
-                //double coorY = aH + coffHeight * (Math.Cos( time) * time) /2;
-                //pline.Points.Add(new Point(time * 5, 200+rnd.Next(-100,100)));
-
-                
             if (time > 10)
                 timer.Stop();
+        }
+
+        private void AreaAB()
+        {
+            
         }
 
         private void WhiteTheme(object sender, RoutedEventArgs e)
@@ -150,13 +131,7 @@ namespace FirstCourseWork
         private void ButtonStart(object sender, RoutedEventArgs e)
         {
             /*
-            _body_mass = Convert.ToDouble(body_mass);
-            _angle = Convert.ToDouble(angle);
-            _coefficient_μ = Convert.ToDouble(coefficient_μ);
-            _driving_force = Convert.ToDouble(driving_force);
-            _initial_speed = Convert.ToDouble(initial_speed);
-            _resistance_force = Convert.ToDouble(resistance_force);
-            _lengthАB = Convert.ToDouble(lengthАB);
+            
             */
             timer.Start();
         }

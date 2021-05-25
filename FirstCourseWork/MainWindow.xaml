@@ -462,7 +462,7 @@
                     </Border>
 
 
-                    <Border Grid.Row="0" Grid.RowSpan="28" Grid.Column="16" Grid.ColumnSpan="56"   BorderThickness="2" CornerRadius="3" BorderBrush="Black" Background="#FFEBEBEB">
+                    <Border Grid.Row="0" Grid.RowSpan="28" Grid.Column="16" Grid.ColumnSpan="44"   BorderThickness="2" CornerRadius="3" BorderBrush="Black" Background="#FFEBEBEB">
                         <Grid >
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -548,6 +548,22 @@
                         </Grid>
 
                     </Border>
+                    
+                    <TabControl Grid.Row="0" Grid.RowSpan="28" Grid.Column="60" Grid.ColumnSpan="12" >
+                        <TabItem>
+                            <TabItem.Header>
+                                <TextBlock Text="Данные"></TextBlock>
+                            </TabItem.Header>
+                        </TabItem>
+
+                        <TabItem>
+                            <TabItem.Header>
+                                <TextBlock Text="Координаты"></TextBlock>
+                            </TabItem.Header>
+                        </TabItem>
+
+                    </TabControl>
+                    
                 </Grid>
                 
             </TabItem>
@@ -560,6 +576,7 @@
                 
             </TabItem>
         </TabControl>
+        
         
         <Button x:Name="buttonStart" Grid.Row="28"  Grid.RowSpan="2" Grid.Column="3"  Grid.ColumnSpan="10" Content="Start" FontWeight="Bold" FontSize="18" BorderBrush="#FFA5C0F0" Background="#FFA5C0F0" Click="ButtonStart" >
             <Button.Effect>
