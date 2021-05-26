@@ -69,19 +69,25 @@ namespace FirstCourseWork
         private void Update()
         {
             InputData();
+            Speed();
             StartDataCanvas();
             AreaAB();
             AreaBC();
         }
-        
+
+        private void Speed()
+        {
+            _speedB = 162 * _coefficient_μ / (Math.Exp(_coefficient_μ * _time_τ / _body_mass) * _body_mass);
+            
+        }
         // Стартовые данные для рисования
         private void StartDataCanvas()
         {
             aW = canvas.ActualWidth;        // ширина канваса 
             aH = canvas.ActualHeight / 2;   // высота канваса
-            maxWidth = (-162 / Math.Exp(_coefficient_μ / _body_mass * 3) - _driving_force / _body_mass + 164)
-                      + ((_force_F / _body_mass) * 4 * 4 * 4) / 6 - _coefficient_f * G * 4 * 4 / 2 + 12.9;
-            maxHeight = -162 / Math.Exp(_coefficient_μ / _body_mass * 3) - _driving_force / _body_mass + 164;
+            maxWidth = (-162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164)
+                      + ((_force_F / _body_mass) * _travel_time * _travel_time * _travel_time) / 6 - _coefficient_f * G * _travel_time * _travel_time / 2 + _speedB;
+            maxHeight = -162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164;
             coffWidth = -aW / maxWidth;
             coffHeight = -aH / maxHeight;
         }
@@ -136,7 +142,7 @@ namespace FirstCourseWork
         private void AreaAB()
         {
             
-            _speedB = 162 * _coefficient_μ / (Math.Exp(_coefficient_μ * _time_τ / _body_mass) * _body_mass);
+            
             
             resistance_force.Text = "μ * V";
             speedB.Text = Math.Round(_speedB, 2)  + "м/с";
@@ -158,7 +164,7 @@ namespace FirstCourseWork
             plineBC.Points.Add(new Point(flipXAB, flipYAB));
             for (double t = 0; t <= _travel_time; t += 0.1)
             {
-                xСВ = ((_force_F / _body_mass) * t * t * t) / 6 - _coefficient_f * G * t * t / 2 + 12.9;
+                xСВ = ((_force_F / _body_mass) * t * t * t) / 6 - _coefficient_f * G * t * t / 2 + _speedB;
                 plineBC.Points.Add(new Point( flipXAB + coffWidth * xСВ,flipYAB));
             }
         }

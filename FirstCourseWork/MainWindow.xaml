@@ -543,7 +543,7 @@
                             <Canvas x:Name="canvas" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="45" Grid.RowSpan="22">
                                 <Polyline x:Name="plineAB" Stroke="Green" StrokeThickness="4" />
                                 <Polyline x:Name="plineBC" Stroke="Fuchsia" StrokeThickness="4" ></Polyline>
-                                <Polyline x:Name="plineCE" Stroke="Blue" ></Polyline>
+                                <Polyline x:Name="plineCE" Stroke="Blue" StrokeThickness="4" ></Polyline>
                             </Canvas>
                             
                         </Grid>
@@ -667,15 +667,15 @@
                                 <TextBlock x:Name="speedB" Grid.Row="3" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
                                 <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="15"  Grid.RowSpan="2" Text="Скорость в точке B :" FontStyle="Italic" TextDecorations="Underline"/>
 
-                                <TextBlock Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
-                                <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="45"  Grid.RowSpan="2" Text="Скорость в точке C :" FontStyle="Italic" TextDecorations="Underline"/>
+                                <TextBlock x:Name="seedC" Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
+                                <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="15"  Grid.RowSpan="2" Text="Скорость в точке C :" FontStyle="Italic" TextDecorations="Underline"/>
 
-                                <TextBlock Grid.Row="7" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
+                               <!-- <TextBlock Grid.Row="7" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
                                 <TextBlock Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="15"  Grid.RowSpan="2" Text="Скорость :" FontStyle="Italic" TextDecorations="Underline"/>
 
                                 <TextBlock Grid.Row="9" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
                                 <TextBlock Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="8"  Grid.RowSpan="2" Text="Скорость :" FontStyle="Italic" TextDecorations="Underline"/>
-
+-->
                             </Grid>
                         </TabItem>
 
