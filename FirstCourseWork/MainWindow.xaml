@@ -667,7 +667,7 @@
                                 <TextBlock x:Name="speedB" Grid.Row="3" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
                                 <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="15"  Grid.RowSpan="2" Text="Скорость в точке B :" FontStyle="Italic" TextDecorations="Underline"/>
 
-                                <TextBlock x:Name="seedC" Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
+                                <TextBlock x:Name="speedC" Grid.Row="5" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />
                                 <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="15"  Grid.RowSpan="2" Text="Скорость в точке C :" FontStyle="Italic" TextDecorations="Underline"/>
 
                                <!-- <TextBlock Grid.Row="7" Grid.Column="18" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="23.452" FontStyle="Italic" />

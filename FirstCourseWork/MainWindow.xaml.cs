@@ -77,8 +77,13 @@ namespace FirstCourseWork
 
         private void Speed()
         {
+            speedA.Text = initial_speed.Text + "м/с";
             _speedB = 162 * _coefficient_μ / (Math.Exp(_coefficient_μ * _time_τ / _body_mass) * _body_mass);
-            
+            speedB.Text = Math.Round(_speedB, 2) + "м/с";
+            _speedС = ((_force_F / _body_mass) * _travel_time * _travel_time / 2) - _coefficient_f * G * _travel_time +
+                      _speedB;
+            speedC.Text = Math.Round(_speedС, 2) + "м/с";
+
         }
         // Стартовые данные для рисования
         private void StartDataCanvas()
@@ -144,9 +149,8 @@ namespace FirstCourseWork
             
             
             
-            resistance_force.Text = "μ * V";
-            speedB.Text = Math.Round(_speedB, 2)  + "м/с";
-            speedA.Text = initial_speed.Text + "м/с";
+            
+
             
             // Рисование графика
             for(double t = 0; t <= 3; t += 0.1)
@@ -212,7 +216,9 @@ namespace FirstCourseWork
             coefficient_μ.Text = "0,5";
             driving_force.Text = "9";
             time_τ.Text = "3";
-
+            
+            resistance_force.Text = "μ * V";
+            
             coefficient_f.Text = "0,2";
             force_F.Text = "50";
             travel_time.Text = "4";
