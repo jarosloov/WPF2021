@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -51,11 +52,13 @@ namespace FirstCourseWork
         private double _force_F;
         private double _travel_time;
         
-        private double xСВ;
-        private double yСВ;
+        private double xСВ = 0;
+        private double yСВ = 0;
         private double _speedС;
         // Участок СЕ
         private double _height;
+        private double xCE;
+        private double yCE;
         
         const double G = 9.80665;
         
@@ -73,6 +76,7 @@ namespace FirstCourseWork
             StartDataCanvas();
             AreaAB();
             AreaBC();
+            AreaCE();
         }
 
         private void Speed()
@@ -83,7 +87,6 @@ namespace FirstCourseWork
             _speedС = ((_force_F / _body_mass) * _travel_time * _travel_time / 2) - _coefficient_f * G * _travel_time +
                       _speedB;
             speedC.Text = Math.Round(_speedС, 2) + "м/с";
-
         }
         // Стартовые данные для рисования
         private void StartDataCanvas()
@@ -91,7 +94,8 @@ namespace FirstCourseWork
             aW = canvas.ActualWidth;        // ширина канваса 
             aH = canvas.ActualHeight / 2;   // высота канваса
             maxWidth = (-162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164)
-                      + ((_force_F / _body_mass) * _travel_time * _travel_time * _travel_time) / 6 - _coefficient_f * G * _travel_time * _travel_time / 2 + _speedB;
+                      + ((_force_F / _body_mass) * _travel_time * _travel_time * _travel_time) / 6 - _coefficient_f * G * _travel_time * _travel_time / 2 + _speedB
+                      + _speedС ;
             maxHeight = -162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164;
             coffWidth = -aW / maxWidth;
             coffHeight = -aH / maxHeight;
@@ -146,21 +150,13 @@ namespace FirstCourseWork
         
         private void AreaAB()
         {
-            
-            
-            
-            
-
-            
-            // Рисование графика
-            for(double t = 0; t <= 3; t += 0.1)
+            for(double t = 0; t <= _time_τ; t += 0.1)
             {
                 xAB = -162 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + 164;
                 flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
                 flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
                 plineAB.Points.Add(new Point(flipXAB, flipYAB));
             }
-            
         }
 
         private void AreaBC()
@@ -171,6 +167,19 @@ namespace FirstCourseWork
                 xСВ = ((_force_F / _body_mass) * t * t * t) / 6 - _coefficient_f * G * t * t / 2 + _speedB;
                 plineBC.Points.Add(new Point( flipXAB + coffWidth * xСВ,flipYAB));
             }
+        }
+
+        
+        private void AreaCE()
+        {
+            plineCE.Points.Add(new Point( flipXAB + coffWidth * xСВ,flipYAB));
+            for (double t = 0; yCE < 2 * _height; t += 0.1)
+            {
+                xCE = _speedС * t;
+                yCE = G * t * t / 2 ;
+                plineCE.Points.Add(new Point( flipXAB + coffWidth * xСВ +coffWidth  * (xCE), flipYAB + coffHeight * (-yCE)));
+            }
+            
         }
         private void WhiteTheme(object sender, RoutedEventArgs e)
         {
@@ -203,6 +212,7 @@ namespace FirstCourseWork
         {
             plineAB.Points.Clear();
             plineBC.Points.Clear();
+            plineCE.Points.Clear();
             //time = 0;
             //timer.Start();
             Update();
