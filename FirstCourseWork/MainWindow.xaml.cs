@@ -21,8 +21,8 @@ namespace FirstCourseWork
 {
     public partial class MainWindow : Window
     {
-        private DispatcherTimer timer = new DispatcherTimer();
-        private double time;
+        //private DispatcherTimer timer = new DispatcherTimer();
+        //private double time;
         
         // Положение граффика 
         private double aW;
@@ -31,6 +31,9 @@ namespace FirstCourseWork
         private double maxHeight;
         private double coffWidth;
         private double coffHeight;
+        private double maxAB;
+        private double maxBC;
+        private double maxCE;
         
         // Участок АВ
         private double _body_mass;
@@ -65,8 +68,8 @@ namespace FirstCourseWork
         public MainWindow()
         {
             InitializeComponent();
-            timer.Tick += new EventHandler(OnTimer);
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            //timer.Tick += new EventHandler(OnTimer);
+            //timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
         }
 
         private void Update()
@@ -93,9 +96,11 @@ namespace FirstCourseWork
         {
             aW = canvas.ActualWidth;        // ширина канваса 
             aH = canvas.ActualHeight / 2;   // высота канваса
-            maxWidth = (-162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164)
-                      + ((_force_F / _body_mass) * _travel_time * _travel_time * _travel_time) / 6 - _coefficient_f * G * _travel_time * _travel_time / 2 + _speedB
-                      + _speedС ;
+            maxAB = -162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164;
+            maxBC = _force_F / _body_mass * _travel_time * _travel_time * _travel_time / 6 -
+                _coefficient_f * G * _travel_time * _travel_time / 2 + _speedB;
+            maxCE = _speedС  * 3;
+            maxWidth = maxAB + maxBC + maxCE;
             maxHeight = -162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164;
             coffWidth = -aW / maxWidth;
             coffHeight = -aH / maxHeight;
@@ -103,8 +108,9 @@ namespace FirstCourseWork
 
         private void OnTimer(object sender, EventArgs e)
         {
-            time += 0.1;
             /**
+            time += 0.1;
+            
             if (time < 3)
             {
 
@@ -126,9 +132,10 @@ namespace FirstCourseWork
                 //coorY = aH - coffHeight * (9.81 * (time * time) / 2 + 3) - 60;
                 //plineCE.Points.Add(new Point(coorX , coorY));
             }
-            **/
+            
             if (time > 100)
                 timer.Stop();
+            **/
         }
 
         private void InputData()
@@ -164,6 +171,7 @@ namespace FirstCourseWork
             plineBC.Points.Add(new Point(flipXAB, flipYAB));
             for (double t = 0; t <= _travel_time; t += 0.1)
             {
+                
                 xСВ = ((_force_F / _body_mass) * t * t * t) / 6 - _coefficient_f * G * t * t / 2 + _speedB;
                 plineBC.Points.Add(new Point( flipXAB + coffWidth * xСВ,flipYAB));
             }
@@ -173,11 +181,11 @@ namespace FirstCourseWork
         private void AreaCE()
         {
             plineCE.Points.Add(new Point( flipXAB + coffWidth * xСВ,flipYAB));
-            for (double t = 0; yCE < 2 * _height; t += 0.1)
+            for (double t = 0;  Math.Abs(yCE) <= _height; t += 0.1)
             {
                 xCE = _speedС * t;
                 yCE = G * t * t / 2 ;
-                plineCE.Points.Add(new Point( flipXAB + coffWidth * xСВ +coffWidth  * (xCE), flipYAB + coffHeight * (-yCE)));
+                plineCE.Points.Add(new Point( flipXAB + coffWidth * xСВ +coffWidth  * xCE, flipYAB + coffHeight * (-yCE)));
             }
             
         }
@@ -210,14 +218,20 @@ namespace FirstCourseWork
 
         private void ButtonStart(object sender, RoutedEventArgs e)
         {
-            plineAB.Points.Clear();
-            plineBC.Points.Clear();
-            plineCE.Points.Clear();
+            Clear();
             //time = 0;
             //timer.Start();
             Update();
         }
 
+        private void Clear()
+        {
+            plineAB.Points.Clear();
+            plineBC.Points.Clear();
+            plineCE.Points.Clear();
+            xAB = xCE = xСВ = 0;
+            yAB = yCE = yСВ = 0;
+        }
         private void StokData(object sender, RoutedEventArgs e)
         {
             body_mass.Text = "4,5";
