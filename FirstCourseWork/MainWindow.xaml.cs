@@ -21,10 +21,10 @@ namespace FirstCourseWork
 {
     public partial class MainWindow : Window
     {
-        //private DispatcherTimer timer = new DispatcherTimer();
-        //private double time;
+        private DispatcherTimer timer = new DispatcherTimer();
+        private double time;
         
-        // Положение граффика 
+        // Положение графика 
         private double aW;
         private double aH;
         private double maxWidth;
@@ -49,6 +49,9 @@ namespace FirstCourseWork
         private double flipXAB;
         private double flipYAB;
         private double _speedB;
+
+        private double cAB_1;
+        private double cAB_2;
         
         // Участок СВ
         private double _coefficient_f;
@@ -58,23 +61,30 @@ namespace FirstCourseWork
         private double xСВ = 0;
         private double yСВ = 0;
         private double _speedС;
+        
+        private double cCB_1;
+        private double cCB_2;
+        
         // Участок СЕ
         private double _height;
         private double xCE;
         private double yCE;
+        
+
         
         const double G = 9.80665;
         
         public MainWindow()
         {
             InitializeComponent();
-            //timer.Tick += new EventHandler(OnTimer);
-            //timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            timer.Tick += new EventHandler(OnTimer);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
         }
 
         private void Update()
         {
             InputData();
+            ConstantIntegrationsAB(0);
             Speed();
             StartDataCanvas();
             AreaAB();
@@ -91,21 +101,40 @@ namespace FirstCourseWork
                       _speedB;
             speedC.Text = Math.Round(_speedС, 2) + "м/с";
         }
+        
         // Стартовые данные для рисования
         private void StartDataCanvas()
         {
             aW = canvas.ActualWidth;        // ширина канваса 
             aH = canvas.ActualHeight / 2;   // высота канваса
-            maxAB = -162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164;
+            maxAB = cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + cAB_2;
             maxBC = _force_F / _body_mass * _travel_time * _travel_time * _travel_time / 6 -
                 _coefficient_f * G * _travel_time * _travel_time / 2 + _speedB;
-            maxCE = _speedС  * 3;
+            maxCE = _speedС  ;
             maxWidth = maxAB + maxBC + maxCE;
-            maxHeight = -162 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + 164;
+            maxHeight = cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + cAB_2;
             coffWidth = -aW / maxWidth;
             coffHeight = -aH / maxHeight;
         }
 
+        private void ConstantIntegrationsAB(double time)
+        {
+            cAB_1 = -_initial_speed * Math.Exp(_coefficient_μ / _body_mass * time) * _body_mass /_coefficient_μ;
+            cAB_2 = -cAB_1 / Math.Exp(_coefficient_μ / _body_mass * time) + _driving_force / _body_mass;
+        }
+        // доделать
+        private void ConstantIntegrationsBC(double time)
+        {
+            cCB_1 = -time * (_force_F / _body_mass - _coefficient_f * G) + _speedB;
+            cCB_2 = _coefficient_f * G * time * time / 2 + _force_F * time * time / (2 * _body_mass) + cCB_1 * time +
+                    flipXAB;
+        }
+        
+        private void ConstantIntegrationsCE()
+        {
+            
+        }
+        
         private void OnTimer(object sender, EventArgs e)
         {
             /**
@@ -159,7 +188,7 @@ namespace FirstCourseWork
         {
             for(double t = 0; t <= _time_τ; t += 0.1)
             {
-                xAB = -162 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + 164;
+                xAB = cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + cAB_2;
                 flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
                 flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
                 plineAB.Points.Add(new Point(flipXAB, flipYAB));
@@ -193,12 +222,18 @@ namespace FirstCourseWork
         {
             window.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
             regionAB.Background = new SolidColorBrush(Color.FromRgb(235, 235, 235));
+            regionCB.Background = new SolidColorBrush(Color.FromRgb(235, 235, 235));
+            regionCE.Background = new SolidColorBrush(Color.FromRgb(235, 235, 235));
+            tabControl1.Background = new SolidColorBrush(Color.FromRgb(235, 235, 235));
         }
 
         private void DarkTheme(object sender, RoutedEventArgs e)
         {
             window.Background = new SolidColorBrush(Color.FromRgb(128, 128, 128));
             regionAB.Background = new SolidColorBrush(Color.FromRgb(192, 192, 192));
+            regionCB.Background = new SolidColorBrush(Color.FromRgb(192, 192, 192));
+            regionCE.Background = new SolidColorBrush(Color.FromRgb(192, 192, 192));
+            tabControl1.Background = new SolidColorBrush(Color.FromRgb(195, 195, 195));
         }
 
         private void LinkToProject(object sender, RoutedEventArgs e)

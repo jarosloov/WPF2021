@@ -140,7 +140,7 @@
             <MenuItem Header="Стоковые данные" Click="StokData"></MenuItem>
         </Menu>
 
-        <TabControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="64" Grid.RowSpan="30">
+        <TabControl x:Name="tabControl1" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="64" Grid.RowSpan="30">
             <TabControl.Effect>
                 <DropShadowEffect></DropShadowEffect>
             </TabControl.Effect>
