@@ -50,8 +50,8 @@ namespace FirstCourseWork
         private double flipYAB;
         private double _speedB;
 
-        private double cAB_1;
-        private double cAB_2;
+        private double _cAB_1;
+        private double _cAB_2;
         
         // Участок СВ
         private double _coefficient_f;
@@ -62,13 +62,18 @@ namespace FirstCourseWork
         private double yСВ = 0;
         private double _speedС;
         
-        private double cCB_1;
-        private double cCB_2;
+        private double _cCB_1;
+        private double _cCB_2;
         
         // Участок СЕ
         private double _height;
         private double xCE;
         private double yCE;
+
+        private double _cCE_1;
+        private double _cCE_2;
+        private double _cCE_3;
+        private double _cCE_4;
         
 
         
@@ -81,12 +86,19 @@ namespace FirstCourseWork
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
         }
 
-        private void Update()
+        private void Update(int time)
         {
-            InputData();
-            ConstantIntegrationsAB(0);
-            Speed();
-            StartDataCanvas();
+            InputData();                            // Ввод данных
+            ConstantIntegrationsAB(time);           // Расчет постоянных для участка АВ
+            Speed();                                // Расчет скоростей 
+            ConstantIntegrationsBC(time);
+            ConstantIntegrationsCE(time);
+            StartDataCanvas();                      // Расчет разрешение графика 
+            PrintGraph();                           // Рисование графика
+        }
+
+        private void PrintGraph()
+        {
             AreaAB();
             AreaBC();
             AreaCE();
@@ -95,7 +107,7 @@ namespace FirstCourseWork
         private void Speed()
         {
             speedA.Text = initial_speed.Text + "м/с";
-            _speedB = 162 * _coefficient_μ / (Math.Exp(_coefficient_μ * _time_τ / _body_mass) * _body_mass);
+            _speedB = -_cAB_1 * _coefficient_μ / (Math.Exp(_coefficient_μ * _time_τ / _body_mass) * _body_mass);
             speedB.Text = Math.Round(_speedB, 2) + "м/с";
             _speedС = ((_force_F / _body_mass) * _travel_time * _travel_time / 2) - _coefficient_f * G * _travel_time +
                       _speedB;
@@ -105,63 +117,45 @@ namespace FirstCourseWork
         // Стартовые данные для рисования
         private void StartDataCanvas()
         {
-            aW = canvas.ActualWidth;        // ширина канваса 
+            aW = canvas.ActualWidth / 1.5;        // ширина канваса 
             aH = canvas.ActualHeight / 2;   // высота канваса
-            maxAB = cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + cAB_2;
+            maxAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
             maxBC = _force_F / _body_mass * _travel_time * _travel_time * _travel_time / 6 -
-                _coefficient_f * G * _travel_time * _travel_time / 2 + _speedB;
+                _coefficient_f * G * _travel_time * _travel_time / 2 + _cCE_1  + _cCE_2;
             maxCE = _speedС  ;
             maxWidth = maxAB + maxBC + maxCE;
-            maxHeight = cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + cAB_2;
+            maxHeight = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
             coffWidth = -aW / maxWidth;
             coffHeight = -aH / maxHeight;
         }
 
         private void ConstantIntegrationsAB(double time)
         {
-            cAB_1 = -_initial_speed * Math.Exp(_coefficient_μ / _body_mass * time) * _body_mass /_coefficient_μ;
-            cAB_2 = -cAB_1 / Math.Exp(_coefficient_μ / _body_mass * time) + _driving_force / _body_mass;
+            _cAB_1 = -_initial_speed * Math.Exp(_coefficient_μ / _body_mass * time) * _body_mass /_coefficient_μ;
+            _cAB_2 = -_cAB_1 / Math.Exp(_coefficient_μ / _body_mass * time) + _driving_force / _body_mass;
         }
         // доделать
         private void ConstantIntegrationsBC(double time)
         {
-            cCB_1 = -time * (_force_F / _body_mass - _coefficient_f * G) + _speedB;
-            cCB_2 = _coefficient_f * G * time * time / 2 + _force_F * time * time / (2 * _body_mass) + cCB_1 * time +
-                    flipXAB;
+            _cCB_1 = -time * (_force_F / _body_mass - _coefficient_f * G) + _speedB;
+            _cCB_2 = _coefficient_f * G * time * time / 2 + _force_F * time * time / (2 * _body_mass) + _cCB_1 * time;
         }
         
-        private void ConstantIntegrationsCE()
+        private void ConstantIntegrationsCE(double time)
         {
-            
+            // х
+            _cCE_1 = _speedС;
+            _cCE_2 = -_cCE_1 * time;
+            // y
+            _cCE_3 = 0;
+            _cCE_4 = 0;
         }
         
         private void OnTimer(object sender, EventArgs e)
         {
             /**
             time += 0.1;
-            
-            if (time < 3)
-            {
 
-                coorX = aW + coffWidth * _x;
-                coorY = aH + coffHeight * _y;
-                plineAB.Points.Add(new Point(coorX, coorY));
-            }
-
-            if (time > 2 && time < 7)
-            {
-                //coorX = aW + coffWidth * ((1.85 * time * time * time -0.981 * time * time + 13.33474 * time));
-                //coorY = aH + coffHeight * 32.98845;
-                //plineBC.Points.Add(new Point(coorX , coorY));
-            }
-
-            if ( time < 2.5)
-            {
-                //coorX =   aW - 220 + (coffWidth * 94.28674 * time);
-                //coorY = aH - coffHeight * (9.81 * (time * time) / 2 + 3) - 60;
-                //plineCE.Points.Add(new Point(coorX , coorY));
-            }
-            
             if (time > 100)
                 timer.Stop();
             **/
@@ -188,7 +182,7 @@ namespace FirstCourseWork
         {
             for(double t = 0; t <= _time_τ; t += 0.1)
             {
-                xAB = cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + cAB_2;
+                xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + _cAB_2;
                 flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
                 flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
                 plineAB.Points.Add(new Point(flipXAB, flipYAB));
@@ -200,7 +194,6 @@ namespace FirstCourseWork
             plineBC.Points.Add(new Point(flipXAB, flipYAB));
             for (double t = 0; t <= _travel_time; t += 0.1)
             {
-                
                 xСВ = ((_force_F / _body_mass) * t * t * t) / 6 - _coefficient_f * G * t * t / 2 + _speedB;
                 plineBC.Points.Add(new Point( flipXAB + coffWidth * xСВ,flipYAB));
             }
@@ -212,7 +205,7 @@ namespace FirstCourseWork
             plineCE.Points.Add(new Point( flipXAB + coffWidth * xСВ,flipYAB));
             for (double t = 0;  Math.Abs(yCE) <= _height; t += 0.1)
             {
-                xCE = _speedС * t;
+                xCE = _cCE_1 * t + _cCE_2;
                 yCE = G * t * t / 2 ;
                 plineCE.Points.Add(new Point( flipXAB + coffWidth * xСВ +coffWidth  * xCE, flipYAB + coffHeight * (-yCE)));
             }
@@ -256,7 +249,7 @@ namespace FirstCourseWork
             Clear();
             //time = 0;
             //timer.Start();
-            Update();
+            Update(0);
         }
 
         private void Clear()
