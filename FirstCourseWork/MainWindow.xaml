@@ -138,6 +138,7 @@
                 <MenuItem Header="Exit" Click="Exit" VerticalAlignment="Top"></MenuItem>
             </MenuItem>
             <MenuItem Header="Стоковые данные" Click="StokData"></MenuItem>
+            <MenuItem Header="Запуск анимации" Click="PlayAnimation"></MenuItem>
         </Menu>
 
         <TabControl x:Name="tabControl1" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="64" Grid.RowSpan="30">

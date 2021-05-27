@@ -21,8 +21,8 @@ namespace FirstCourseWork
 {
     public partial class MainWindow : Window
     {
-        private DispatcherTimer timer = new DispatcherTimer();
-        private double time;
+        private DispatcherTimer timerAnimation = new DispatcherTimer();
+        private double timeAnimation;
         
         // Положение графика 
         private double aW;
@@ -58,8 +58,8 @@ namespace FirstCourseWork
         private double _force_F;
         private double _travel_time;
         
-        private double xСВ = 0;
-        private double yСВ = 0;
+        private double xСВ;
+        private double yСВ;
         private double _speedС;
         
         private double _cCB_1;
@@ -82,19 +82,28 @@ namespace FirstCourseWork
         public MainWindow()
         {
             InitializeComponent();
-            timer.Tick += new EventHandler(OnTimer);
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            timerAnimation.Tick += new EventHandler(OnTimer);
+            timerAnimation.Interval = new TimeSpan(0, 0, 0, 0, 20);
         }
 
-        private void Update(int time)
+        private void Update(bool status)
         {
             InputData();                            // Ввод данных
-            ConstantIntegrationsAB(time);           // Расчет постоянных для участка АВ
-            Speed();                                // Расчет скоростей 
-            ConstantIntegrationsBC(time);
-            ConstantIntegrationsCE(time);
-            StartDataCanvas();                      // Расчет разрешение графика 
-            PrintGraph();                           // Рисование графика
+            switch (status)
+            {
+                case true:
+                    ConstantIntegrations(true);         // c анимацией 
+                    StartDataCanvas();                          // Расчет разрешение графика 
+                    break;
+                case false:
+                    ConstantIntegrations(false);    // без аниации
+                    StartDataCanvas();                      // Расчет разрешение графика 
+                    PrintGraph();                           // Рисование графика
+                    break;
+            }
+           
+
+
         }
 
         private void PrintGraph()
@@ -103,6 +112,30 @@ namespace FirstCourseWork
             AreaBC();
             AreaCE();
         }
+
+        private void ConstantIntegrations(bool status)
+        {
+            if (status == false)
+            {
+                ConstantIntegrationsAB(0);         // Расчет постоянных для участка АВ
+                Speed();                                // Расчет скоростей 
+                ConstantIntegrationsBC(0);
+                ConstantIntegrationsCE(0);
+            }
+
+            if(status)
+            {
+                MessageBox.Show("aнимация");
+                ConstantIntegrationsAB(0);         // Расчет постоянных для участка АВ
+                Speed();                                // Расчет скоростей 
+                ConstantIntegrationsBC(_time_τ);
+                ConstantIntegrationsCE(_travel_time);
+                timeAnimation = 0;
+                timerAnimation.Start();
+            }
+        }
+        
+        
 
         private void Speed()
         {
@@ -117,8 +150,8 @@ namespace FirstCourseWork
         // Стартовые данные для рисования
         private void StartDataCanvas()
         {
-            aW = canvas.ActualWidth / 1.5;        // ширина канваса 
-            aH = canvas.ActualHeight / 2;   // высота канваса
+            aW = canvas.ActualWidth / 1.5;          // ширина канваса 
+            aH = canvas.ActualHeight / 2;           // высота канваса
             maxAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
             maxBC = _force_F / _body_mass * _travel_time * _travel_time * _travel_time / 6 -
                 _coefficient_f * G * _travel_time * _travel_time / 2 + _cCE_1  + _cCE_2;
@@ -153,12 +186,18 @@ namespace FirstCourseWork
         
         private void OnTimer(object sender, EventArgs e)
         {
-            /**
-            time += 0.1;
+            timeAnimation += 0.1;
 
-            if (time > 100)
-                timer.Stop();
-            **/
+
+                xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * timeAnimation) - _driving_force / _body_mass + _cAB_2;
+                flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
+                flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
+                plineAB.Points.Add(new Point(flipXAB, flipYAB));
+                
+            
+            if (timeAnimation >= _time_τ)
+                timerAnimation.Stop();
+
         }
 
         private void InputData()
@@ -247,9 +286,13 @@ namespace FirstCourseWork
         private void ButtonStart(object sender, RoutedEventArgs e)
         {
             Clear();
-            //time = 0;
-            //timer.Start();
-            Update(0);
+            Update(false);
+        }
+        
+        private void PlayAnimation(object sender, RoutedEventArgs e)
+        {
+            Clear();
+            Update(true);
         }
 
         private void Clear()
