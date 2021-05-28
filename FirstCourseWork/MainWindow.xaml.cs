@@ -109,8 +109,8 @@ namespace FirstCourseWork
         private void PrintGraph()
         {
             AreaAB();
-            AreaBC();
-            AreaCE();
+            //AreaBC();
+            //AreaCE();
         }
 
         private void ConstantIntegrations(bool status)
@@ -152,12 +152,14 @@ namespace FirstCourseWork
         {
             aW = canvas.ActualWidth / 1.5;          // ширина канваса 
             aH = canvas.ActualHeight / 2;           // высота канваса
-            maxAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
+            maxAB =  -62.426 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) +
+                     (_driving_force / _body_mass - G * Math.Sin(_angle)) * _time_τ / _coefficient_μ / _body_mass + 64.426 + 100;
             maxBC = _force_F / _body_mass * _travel_time * _travel_time * _travel_time / 6 -
                 _coefficient_f * G * _travel_time * _travel_time / 2 + _cCE_1  + _cCE_2;
             maxCE = _speedС  ;
-            maxWidth = maxAB + maxBC + maxCE;
-            maxHeight = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
+            maxWidth = maxAB;
+            maxHeight = -62.426 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) +
+                        (_driving_force / _body_mass - G * Math.Sin(_angle)) * _time_τ / _coefficient_μ / _body_mass + 64.426;;
             coffWidth = -aW / maxWidth;
             coffHeight = -aH / maxHeight;
         }
@@ -221,7 +223,10 @@ namespace FirstCourseWork
         {
             for(double t = 0; t <= _time_τ; t += 0.1)
             {
-                xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + _cAB_2;
+                xAB = -62.426 / Math.Exp(_coefficient_μ / _body_mass * t) +
+                      (_driving_force / _body_mass - G * Math.Sin(_angle)) * t / _coefficient_μ / _body_mass + 64.426;
+                
+                //xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + _cAB_2;
                 flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
                 flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
                 plineAB.Points.Add(new Point(flipXAB, flipYAB));
