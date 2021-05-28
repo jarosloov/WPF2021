@@ -179,7 +179,7 @@ namespace FirstCourseWork
             // х
             _cCE_1 = _speedС;
             _cCE_2 = -_cCE_1 * time;
-            // y
+            //  y
             _cCE_3 = 0;
             _cCE_4 = 0;
         }
