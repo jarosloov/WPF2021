@@ -178,7 +178,7 @@ namespace FirstCourseWork
         
         private void ConstantIntegrationsCE(double time)
         {
-            // х
+            //  х
             _cCE_1 = _speedС;
             _cCE_2 = -_cCE_1 * time;
             //  y
