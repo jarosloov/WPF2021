@@ -21,8 +21,8 @@ namespace FirstCourseWork
 {
     public partial class MainWindow : Window
     {
-        private DispatcherTimer timerAnimation = new DispatcherTimer();
-        private double timeAnimation;
+        private DispatcherTimer timer = new DispatcherTimer();
+        private double time;
         
         // Положение графика 
         private double aW;
@@ -58,8 +58,8 @@ namespace FirstCourseWork
         private double _force_F;
         private double _travel_time;
         
-        private double xСВ;
-        private double yСВ;
+        private double xСВ = 0;
+        private double yСВ = 0;
         private double _speedС;
         
         private double _cCB_1;
@@ -82,60 +82,29 @@ namespace FirstCourseWork
         public MainWindow()
         {
             InitializeComponent();
-            timerAnimation.Tick += new EventHandler(OnTimer);
-            timerAnimation.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            timer.Tick += new EventHandler(OnTimer);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 20);
         }
 
-        private void Update(bool status)
+        private void Update(int time)
         {
             InputData();                            // Ввод данных
-            switch (status)
-            {
-                case true:
-                    ConstantIntegrations(true);         // c анимацией 
-                    StartDataCanvas();                          // Расчет разрешение графика 
-                    break;
-                case false:
-                    ConstantIntegrations(false);    // без аниации
-                    StartDataCanvas();                      // Расчет разрешение графика 
-                    PrintGraph();                           // Рисование графика
-                    break;
-            }
-           
-
-
+            ConstantIntegrationsAB(time);           // Расчет постоянных для участка АВ
+            Speed();                                // Расчет скоростей 
+            ConstantIntegrationsBC(time);
+            ConstantIntegrationsCE(time);
+            StartDataCanvas();                      // Расчет разрешение графика 
+            PrintGraph();                           // Рисование графика
+            
         }
 
         private void PrintGraph()
         {
-            AreaAB();
+            //AreaAB();
+            timer.Start();
             //AreaBC();
             //AreaCE();
         }
-
-        private void ConstantIntegrations(bool status)
-        {
-            if (status == false)
-            {
-                ConstantIntegrationsAB(0);         // Расчет постоянных для участка АВ
-                Speed();                                // Расчет скоростей 
-                ConstantIntegrationsBC(0);
-                ConstantIntegrationsCE(0);
-            }
-
-            if(status)
-            {
-                MessageBox.Show("aнимация");
-                ConstantIntegrationsAB(0);         // Расчет постоянных для участка АВ
-                Speed();                                // Расчет скоростей 
-                ConstantIntegrationsBC(_time_τ);
-                ConstantIntegrationsCE(_travel_time);
-                timeAnimation = 0;
-                timerAnimation.Start();
-            }
-        }
-        
-        
 
         private void Speed()
         {
@@ -150,16 +119,14 @@ namespace FirstCourseWork
         // Стартовые данные для рисования
         private void StartDataCanvas()
         {
-            aW = canvas.ActualWidth / 1.5;          // ширина канваса 
-            aH = canvas.ActualHeight / 2;           // высота канваса
-            maxAB =  -62.426 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) +
-                     (_driving_force / _body_mass - G * Math.Sin(_angle)) * _time_τ / _coefficient_μ / _body_mass + 64.426 + 100;
+            aW = canvas.ActualWidth / 1.5;        // ширина канваса 
+            aH = canvas.ActualHeight / 2;   // высота канваса
+            maxAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
             maxBC = _force_F / _body_mass * _travel_time * _travel_time * _travel_time / 6 -
                 _coefficient_f * G * _travel_time * _travel_time / 2 + _cCE_1  + _cCE_2;
             maxCE = _speedС  ;
-            maxWidth = maxAB;
-            maxHeight = -62.426 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) +
-                        (_driving_force / _body_mass - G * Math.Sin(_angle)) * _time_τ / _coefficient_μ / _body_mass + 64.426;;
+            maxWidth = maxAB + maxBC + maxCE;
+            maxHeight = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
             coffWidth = -aW / maxWidth;
             coffHeight = -aH / maxHeight;
         }
@@ -178,28 +145,41 @@ namespace FirstCourseWork
         
         private void ConstantIntegrationsCE(double time)
         {
-            //  х
+            // х
             _cCE_1 = _speedС;
             _cCE_2 = -_cCE_1 * time;
-            //  y
+            // y
             _cCE_3 = 0;
             _cCE_4 = 0;
         }
         
         private void OnTimer(object sender, EventArgs e)
         {
-            timeAnimation += 0.1;
-
-
-                xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * timeAnimation) - _driving_force / _body_mass + _cAB_2;
-                flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
-                flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
-                plineAB.Points.Add(new Point(flipXAB, flipYAB));
-                
             
-            if (timeAnimation >= _time_τ)
-                timerAnimation.Stop();
-
+            time +=  0.1;
+            if (time <= _time_τ)
+            {
+                 xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * time) - _driving_force / _body_mass + _cAB_2;
+                 flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
+                 flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
+                
+                 plineAB.Points.Add(new Point(flipXAB, flipYAB));
+            }
+            else if(time - _time_τ <= _travel_time)
+            {
+                xСВ = ((_force_F / _body_mass) * (time - _time_τ) * (time - _time_τ) * (time - _time_τ)) / 6 -
+                    _coefficient_f * G * (time - _time_τ) * (time - _time_τ) / 2 + _speedB;
+                Console.WriteLine(xСВ);
+                plineAB.Points.Add(new Point(flipXAB + coffWidth * xСВ, flipYAB));
+            }
+            else if(Math.Abs(yCE) <= _height)
+            {
+                xCE = _cCE_1 * (time - _time_τ - _travel_time) + _cCE_2;
+                yCE = G * (time - _time_τ - _travel_time) * (time - _time_τ - _travel_time) / 2;
+                plineAB.Points.Add(new Point(flipXAB + coffWidth * xСВ + coffWidth * xCE, flipYAB + coffHeight * (-yCE)));
+            }
+            else 
+                timer.Stop();
         }
 
         private void InputData()
@@ -223,13 +203,12 @@ namespace FirstCourseWork
         {
             for(double t = 0; t <= _time_τ; t += 0.1)
             {
-                xAB = -62.426 / Math.Exp(_coefficient_μ / _body_mass * t) +
-                      (_driving_force / _body_mass - G * Math.Sin(_angle)) * t / _coefficient_μ / _body_mass + 64.426;
-                
-                //xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + _cAB_2;
+                xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + _cAB_2;
                 flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
                 flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
-                plineAB.Points.Add(new Point(flipXAB, flipYAB));
+                //plineAB.Points.Add(new Point(flipXAB, flipYAB));
+                
+                
             }
         }
 
@@ -291,13 +270,9 @@ namespace FirstCourseWork
         private void ButtonStart(object sender, RoutedEventArgs e)
         {
             Clear();
-            Update(false);
-        }
-        
-        private void PlayAnimation(object sender, RoutedEventArgs e)
-        {
-            Clear();
-            Update(true);
+            time = 0;
+            
+            Update(0);
         }
 
         private void Clear()
@@ -327,3 +302,4 @@ namespace FirstCourseWork
         }
     }
 }
+
