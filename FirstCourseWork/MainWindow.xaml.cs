@@ -100,16 +100,15 @@ namespace FirstCourseWork
 
         private void PrintGraph()
         {
-            //AreaAB();
             timer.Start();
-            //AreaBC();
-            //AreaCE();
+
         }
 
         private void Speed()
         {
             speedA.Text = initial_speed.Text + "м/с";
-            _speedB = -_cAB_1 * _coefficient_μ / (Math.Exp(_coefficient_μ * _time_τ / _body_mass) * _body_mass);
+            double qwe = _driving_force / _coefficient_μ - _body_mass / _coefficient_μ * G * Math.Sin(_angle);
+            _speedB = qwe - _cAB_1  * Math.Exp(-_time_τ * _coefficient_μ / _body_mass);
             speedB.Text = Math.Round(_speedB, 2) + "м/с";
             _speedС = ((_force_F / _body_mass) * _travel_time * _travel_time / 2) - _coefficient_f * G * _travel_time +
                       _speedB;
@@ -121,7 +120,8 @@ namespace FirstCourseWork
         {
             aW = canvas.ActualWidth / 1.5;        // ширина канваса 
             aH = canvas.ActualHeight / 2;   // высота канваса
-            maxAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
+            maxAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ)+ 
+                    (_driving_force / _body_mass - G * Math.Sin(_angle)) * _time_τ / _coefficient_μ / _body_mass+_cAB_2; 
             maxBC = _force_F / _body_mass * _travel_time * _travel_time * _travel_time / 6 -
                 _coefficient_f * G * _travel_time * _travel_time / 2 + _cCE_1  + _cCE_2;
             maxCE = _speedС  ;
@@ -133,8 +133,8 @@ namespace FirstCourseWork
 
         private void ConstantIntegrationsAB(double time)
         {
-            _cAB_1 = -_initial_speed * Math.Exp(_coefficient_μ / _body_mass * time) * _body_mass /_coefficient_μ;
-            _cAB_2 = -_cAB_1 / Math.Exp(_coefficient_μ / _body_mass * time) + _driving_force / _body_mass;
+            _cAB_1 = _initial_speed - _driving_force/_coefficient_μ - G * Math.Sin(_angle) *_body_mass / _coefficient_μ;
+            _cAB_2 = -_cAB_1;
         }
         // доделать
         private void ConstantIntegrationsBC(double time)
@@ -159,7 +159,8 @@ namespace FirstCourseWork
             time +=  0.1;
             if (time <= _time_τ)
             {
-                 xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * time) - _driving_force / _body_mass + _cAB_2;
+                xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * time)+ 
+                      (_driving_force / _body_mass - G * Math.Sin(_angle)) * time / _coefficient_μ / _body_mass+_cAB_2; 
                  flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
                  flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
                 
@@ -203,7 +204,9 @@ namespace FirstCourseWork
         {
             for(double t = 0; t <= _time_τ; t += 0.1)
             {
-                xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + _cAB_2;
+                //xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t) - _driving_force / _body_mass + _cAB_2;
+                xAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * t)+ 
+                      (_driving_force / _body_mass - G * Math.Sin(_angle)) * t / _coefficient_μ / _body_mass+_cAB_2; 
                 flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
                 flipYAB = aH + coffHeight - xAB * Math.Sin(_angle);
                 //plineAB.Points.Add(new Point(flipXAB, flipYAB));
