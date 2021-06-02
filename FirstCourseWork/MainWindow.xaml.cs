@@ -122,8 +122,8 @@ namespace FirstCourseWork
             aH = canvas.ActualHeight / 2;   // высота канваса
             maxAB = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ)+ 
                     (_driving_force / _body_mass - G * Math.Sin(_angle)) * _time_τ / _coefficient_μ / _body_mass+_cAB_2; 
-            maxBC = _force_F / _body_mass * _travel_time * _travel_time * _travel_time / 6 -
-                _coefficient_f * G * _travel_time * _travel_time / 2 + _cCE_1  + _cCE_2;
+            maxBC = _force_F * _travel_time * _travel_time * _travel_time / (6 * _body_mass) + _coefficient_f * G * _travel_time * _travel_time / 2 +
+                    _cCB_1 * _travel_time +1000;
             maxCE = _speedС  ;
             maxWidth = maxAB + maxBC + maxCE;
             maxHeight = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2;
@@ -139,8 +139,11 @@ namespace FirstCourseWork
         // доделать
         private void ConstantIntegrationsBC(double time)
         {
-            _cCB_1 = -time * (_force_F / _body_mass - _coefficient_f * G) + _speedB;
-            _cCB_2 = _coefficient_f * G * time * time / 2 + _force_F * time * time / (2 * _body_mass) + _cCB_1 * time;
+            _cCB_1 = _speedB - _force_F * time * time / 2 * _body_mass + _coefficient_f * G * time;
+            _cCB_2 = 0;
+
+            //_cCB_1 = -time * (_force_F / _body_mass - _coefficient_f * G) + _speedB;
+            //_cCB_2 = _coefficient_f * G * time * time / 2 + _force_F * time * time / (2 * _body_mass) + _cCB_1 * time;
         }
         
         private void ConstantIntegrationsCE(double time)
@@ -168,16 +171,19 @@ namespace FirstCourseWork
             }
             else if(time - _time_τ <= _travel_time)
             {
-                xСВ = ((_force_F / _body_mass) * (time - _time_τ) * (time - _time_τ) * (time - _time_τ)) / 6 -
-                    _coefficient_f * G * (time - _time_τ) * (time - _time_τ) / 2 + _speedB;
+                xСВ = _force_F * time * time * time / (6 * _body_mass) + _coefficient_f * G * time * time / 2 +
+                      _cCB_1 * time;
+                
+                //xСВ = ((_force_F / _body_mass) * (time - _time_τ) * (time - _time_τ) * (time - _time_τ)) / 6 -
+                //    _coefficient_f * G * (time - _time_τ) * (time - _time_τ) / 2 + _speedB;
                 Console.WriteLine(xСВ);
-                plineAB.Points.Add(new Point(flipXAB + coffWidth * xСВ, flipYAB));
+                plineBC.Points.Add(new Point(coffWidth * xСВ, flipYAB));
             }
             else if(Math.Abs(yCE) <= _height)
             {
                 xCE = _cCE_1 * (time - _time_τ - _travel_time) + _cCE_2;
                 yCE = G * (time - _time_τ - _travel_time) * (time - _time_τ - _travel_time) / 2;
-                plineAB.Points.Add(new Point(flipXAB + coffWidth * xСВ + coffWidth * xCE, flipYAB + coffHeight * (-yCE)));
+                plineCE.Points.Add(new Point(flipXAB + coffWidth * xСВ + coffWidth * xCE, flipYAB + coffHeight * (-yCE)));
             }
             else 
                 timer.Stop();
