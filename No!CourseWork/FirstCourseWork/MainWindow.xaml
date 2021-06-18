@@ -9,7 +9,6 @@
         x:Name="window"  Title="Course Work Jarosloov" Height="720" Width="1280" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
-
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />

@@ -33,7 +33,6 @@ namespace FirstCourseWork
         private double _body_mass;
         private double _initial_speed;
         private double _driving_force;          //Q
-        private double _resistance_force ;
         private double _coefficient_μ;
         private double _angle;
         private double _time_τ;
@@ -51,14 +50,14 @@ namespace FirstCourseWork
         private double _force_F;
         private double _travel_time;
 
-        private double xСВ = 0;
-        private double yСВ = 0;
+        private double xСВ;
+        private double yСВ;
         private double _speedС;
         
         // Участок СЕ
         private double _height;
-        private double xCE = 0;
-        private double yCE = 0;
+        private double xCE;
+        private double yCE;
 
         // Проверки (защита от дурака)
 
