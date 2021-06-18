@@ -530,9 +530,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Canvas x:Name="canvas" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="45" Grid.RowSpan="22">
-                                <Polyline x:Name="plineAB" Stroke="Green" StrokeThickness="4" />
-                                <Polyline x:Name="plineBC" Stroke="Fuchsia" StrokeThickness="4" ></Polyline>
-                                <Polyline x:Name="plineCE" Stroke="Blue" StrokeThickness="4" ></Polyline>
+                                <Polyline x:Name="polyline" Stroke="MediumAquamarine" StrokeThickness="4" ></Polyline>
                                 <Ellipse x:Name="ellipse" Fill="#FFEBEBEB" Width="20" Height="20"></Ellipse>
                             </Canvas>
                             

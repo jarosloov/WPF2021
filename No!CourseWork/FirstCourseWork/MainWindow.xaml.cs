@@ -39,7 +39,6 @@ namespace FirstCourseWork
         private double _time_τ;
 
         private double xAB;
-        private double yAB;
         private double flipXAB;
         private double flipYAB;
         private double _speedB;
@@ -55,19 +54,11 @@ namespace FirstCourseWork
         private double xСВ = 0;
         private double yСВ = 0;
         private double _speedС;
-
-        private double _cCB_1;
-        private double _cCB_2;
-
+        
         // Участок СЕ
         private double _height;
         private double xCE = 0;
         private double yCE = 0;
-
-        private double _cCE_1;
-        private double _cCE_2;
-        private double _cCE_3;
-        private double _cCE_4;
 
         // Проверки (защита от дурака)
 
@@ -88,21 +79,14 @@ namespace FirstCourseWork
 
         private void Start()
         {
+            Clear();
             InputData();                            // Ввод данных
-            
-            if (statusInput)
-            {
-                ConstantIntegrationsAB();               // Расчет постоянных для участка АВ
-                ellipse.Fill = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                timer.Start();
-                Speed();                                // Расчет скоростей 
-                ConstantIntegrationsBC();               // Расчет постоянных для участка BC
-                ConstantIntegrationsCE();               // Расчет постоянных для участка CE
-                StartDataCanvas();                      // Расчет разрешение графика 
-                
-                
-            }
-                
+            if (!statusInput) return;
+            ConstantIntegrationsAB();               // Расчет постоянных для участка АВ
+            ellipse.Fill = new SolidColorBrush(Color.FromRgb(157, 129, 186));
+            timer.Start();
+            Speed();                                // Расчет скоростей 
+            StartDataCanvas();                      // Расчет разрешение графика 
         }
 
         private static readonly Regex regex = new Regex("[^0-9,]");
@@ -114,11 +98,8 @@ namespace FirstCourseWork
         {
             e.Handled = !IsTextAllowed(e.Text);
         }
-        
-
         private void Speed()
         {
-           
             _speedB = b / m - m * _cAB_1 * Math.Exp(-m * _time_τ);
             _speedС = _force_F * _travel_time * _travel_time / (2 * _body_mass) - _coefficient_f * G * _travel_time +
                       _speedB;
@@ -136,19 +117,15 @@ namespace FirstCourseWork
                 speedB.Text = Math.Round(_speedB, 1) + "м/с";
                 speedA.Text = Math.Round(_initial_speed, 1) + "м/с";
             }
-           
-
         }
-
         private void StartDataCanvas()
         {
-            aW = canvas.ActualWidth  ;
+            aW = canvas.ActualWidth;
             aH = canvas.ActualHeight / 2;
             maxAB = _cAB_1 / Math.Exp(m * _time_τ) - b * _time_τ / m  + _cAB_2;
             maxBC = _force_F * _travel_time * _travel_time * _travel_time / (6 * _body_mass) -
-                    _coefficient_f * G * _travel_time * _travel_time / 2 - _cCB_1 * _travel_time;
-            maxCE = 1000  ;
-
+                    _coefficient_f * G * _travel_time * _travel_time / 2 - _speedB  * _travel_time;
+            maxCE = 1000;
             maxWidth = maxAB + maxBC + maxCE;
             maxHeight = _cAB_1 / Math.Exp(_coefficient_μ / _body_mass * _time_τ) - _driving_force / _body_mass + _cAB_2 + 100;
             coffWidth = -aW / maxWidth;
@@ -156,49 +133,36 @@ namespace FirstCourseWork
         }
         private void ConstantIntegrationsAB()
         {
-            _cAB_1 = (_initial_speed - b/m)/-m  ;
+            _cAB_1 = (_initial_speed - b/m)/-m;
             _cAB_2 = -_cAB_1;
-        }
-        private void ConstantIntegrationsBC()
-        {
-            _cCB_1 = _speedB;
-        }
-
-        private void ConstantIntegrationsCE()
-        {
-            // х
-            _cCE_1 = _speedС;
-            // y
-            _cCE_3 = _speedС;
         }
 
         private void OnTimer(object sender, EventArgs e)
         {
             time +=  0.1;
-            
             if (time <= _time_τ)
             {
                 xAB = _cAB_1 / Math.Exp(m * time) - b * time / m + _cAB_2;
                 flipXAB = aW + coffWidth * xAB * Math.Cos(_angle);
                 flipYAB = aH + coffHeight * (- xAB) * Math.Sin(_angle);
-                plineBC.Points.Add(new Point(flipXAB, flipYAB));
+                polyline.Points.Add(new Point(flipXAB, flipYAB));
             }
             else if(time - _time_τ <= _travel_time)
             {
                 xСВ = _force_F * time * time * time / (6 * _body_mass) - _coefficient_f * G * time * time / 2 -
-                      _cCB_1 * time;
-                plineBC.Points.Add(new Point(flipXAB + coffWidth * xСВ, flipYAB));
+                      _speedB * time;
+                polyline.Points.Add(new Point(flipXAB + coffWidth * xСВ, flipYAB));
             }
             else if(flipYAB + coffHeight * yCE <= aH)
             {
                 xCE = _speedС * (time - _time_τ - _travel_time);
                 yCE = G * (time - _time_τ - _travel_time) * (time - _time_τ - _travel_time) / 2 ;
-                plineBC.Points.Add(new Point(flipXAB + coffWidth * (xCE +xСВ) , flipYAB + coffHeight * yCE));
+                polyline.Points.Add(new Point(flipXAB + coffWidth * (xCE +xСВ) , flipYAB + coffHeight * yCE));
             }
             else 
                 timer.Stop();
-            Canvas.SetLeft(ellipse, plineBC.Points.Last().X - ellipse.Width / 2.0);
-            Canvas.SetTop(ellipse, plineBC.Points.Last().Y - ellipse.Height / 2.0); 
+            Canvas.SetLeft(ellipse, polyline.Points.Last().X - ellipse.Width / 2.0);
+            Canvas.SetTop(ellipse, polyline.Points.Last().Y - ellipse.Height / 2.0); 
         }
 
         private void InputData()
@@ -235,13 +199,11 @@ namespace FirstCourseWork
                 _driving_force = Convert.ToDouble(driving_force.Text);
                 _initial_speed = Convert.ToDouble(initial_speed.Text);
                 _time_τ = Convert.ToDouble(time_τ.Text);
-
                 _coefficient_f = Convert.ToDouble(coefficient_f.Text);
                 _force_F = Convert.ToDouble(force_F.Text);
                 _travel_time = Convert.ToDouble((travel_time.Text));
-            
                 _height = Convert.ToDouble(height.Text);
-
+                // для краткости
                 b = _driving_force / _body_mass - G * Math.Sin(_angle);
                 m = _coefficient_μ / _body_mass;
             }
@@ -256,26 +218,21 @@ namespace FirstCourseWork
         {
             Process.Start("https://github.com/jarosloov");
         }
-
+        //  Выход из программы
         private void Exit(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
-
+        
         private void ButtonStart(object sender, RoutedEventArgs e)
         {
-            Clear();
             Start();
         }
 
         private void Clear()
         {
-            plineAB.Points.Clear();
-            plineBC.Points.Clear();
-            plineCE.Points.Clear();
-            xAB = xCE = xСВ = 0;
-            yAB = yCE = yСВ = 0;
-            time = 0;
+            polyline.Points.Clear();
+            time = xAB = xCE = xСВ = yCE = yСВ = 0;
             speedC.Text = "........";
             speedB.Text = "........";
             speedA.Text = "........";
