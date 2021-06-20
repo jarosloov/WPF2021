@@ -63,7 +63,6 @@ namespace FirstCourseWork
 
         private bool statusInput = true;
 
-
         // Для сокращения
 
         private double b;
@@ -74,18 +73,6 @@ namespace FirstCourseWork
             InitializeComponent();
             timer.Tick += new EventHandler(OnTimer);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 20);
-        }
-
-        private void Start()
-        {
-            Clear();
-            InputData();                            // Ввод данных
-            if (!statusInput) return;
-            ConstantIntegrationsAB();               // Расчет постоянных для участка АВ
-            ellipse.Fill = new SolidColorBrush(Color.FromRgb(157, 129, 186));
-            timer.Start();
-            Speed();                                // Расчет скоростей 
-            StartDataCanvas();                      // Расчет разрешение графика 
         }
 
         private static readonly Regex regex = new Regex("[^0-9,]");
@@ -225,7 +212,14 @@ namespace FirstCourseWork
         
         private void ButtonStart(object sender, RoutedEventArgs e)
         {
-            Start();
+            Clear();
+            InputData();                            // Ввод данных
+            if (!statusInput) return;
+            ConstantIntegrationsAB();               // Расчет постоянных для участка АВ
+            ellipse.Fill = new SolidColorBrush(Color.FromRgb(157, 129, 186));
+            timer.Start();
+            Speed();                                // Расчет скоростей 
+            StartDataCanvas();                      // Расчет разрешение графика 
         }
 
         private void Clear()
